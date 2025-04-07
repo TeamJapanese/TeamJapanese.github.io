@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Team Japanese </title>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1a001f, #330033);
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 10%;
+      background-color: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo-img {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 20px;
+    }
+
+    nav ul li {
+      list-style: none;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: 500;
+      position: relative;
+    }
+
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: #f0f;
+      transition: width 0.3s;
+    }
+
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+      background: radial-gradient(circle, #2b0033, #1a001f);
+    }
+
+    .typing {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: #ff80ff;
+      text-shadow: 0 0 10px #ff80ff;
+    }
+
+    section {
+      padding: 60px 10%;
+      background: rgba(0, 0, 0, 0.2);
+      border-top: 1px solid #fff2;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 2rem;
+      color: #fff;
+    }
+
+    .projects,
+    .team-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+
+    .project,
+    .team-member {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border-radius: 12px;
+      width: 280px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .project:hover,
+    .team-member:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(255, 0, 255, 0.4);
+    }
+
+    .project a {
+      color: #f0f;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .team-member img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #ff00cc;
+      margin-bottom: 10px;
+    }
+
+    form input,
+    form textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 8px;
+      background: #1a001f;
+      color: #fff;
+      outline: none;
+    }
+
+    form .btn {
+      background: #ff00cc;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    form .btn:hover {
+      background: #e600b8;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.7);
+      font-size: 0.9rem;
+      border-top: 1px solid #fff2;
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        background: rgba(0, 0, 0, 0.7);
+        position: absolute;
+        top: 60px;
+        right: 10%;
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="img/japanese.png" alt="Team Japanese Logo" class="logo-img" />
+      Team Japanese
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1 class="typing" id="typing"></h1>
+    <p>I founded Team Japanese with a vision to create the world's most advanced, high-performance Userbot ecosystem that seamlessly integrates across multiple platforms like Discord, WhatsApp, Telegram, Instagram, and Twitter, as well as expanding into cloud-based AI automation, cybersecurity, and futuristic digital solutions and I'm also working on a horror game that will be available on both PC and mobile, delivering a terrifyingly immersive experience with stunning graphics, intense gameplay, and next-gen horror elements.
+With a passion for technology, automation, and next-generation innovations, I'm dedicated to making Team Japanese a leader in AI-powered automation, cybersecurity, and gaming.</p>
+  </section>
+
+  <section id="about">
+    <h2 data-aos="fade-up">About Team Japanese</h2>
+    <p data-aos="fade-up">We build high-quality bots, futuristic websites, music platforms, and stunning UI/UX systems. Our mission is to become the largest tech community with high-performance and cyber-futuristic experiences.</p>
+  </section>
+
+  <section id="projects">
+    <h2 data-aos="fade-up">Our GitHub Projects</h2>
+    <div class="projects">
+      <div class="project" data-aos="zoom-in">
+        <h3>TheJapanese Userbot</h3>
+        <p>The Japanese Userbot is a next-gen multi-platform automation bot by TeamJapanese, supporting Discord, WhatsApp, Telegram, Instagram, and Twitter. Built with Python, JavaScript, Docker, and PostgreSQL, it offers fast, secure, and scalable automation with AI features—aiming to be the world’s largest and most advanced Userbot.</p>
+        <a href="https://github.com/TeamJapanese/TheJapanese" target="_blank">View on GitHub</a>
+      </div>
+      <div class="project" data-aos="zoom-in">
+        <h3>1920 The Allerton Castle </h3>
+        <p>1920 The Allerton Castle is an horror game by TeamJapanese, inspired by the film 1920 and Allerton Castle, featuring dynamic scares, immersive visuals, and Unreal Engine 5.</p>
+        <a href="https://github.com/TeamJapanese/1920-The-Allerton-Castle" target="_blank">View on GitHub</a>
+      </div>
+      <div class="project" data-aos="zoom-in">
+        <h3>The Japanese User Portfolio</h3>
+        <p>TheJapanese-Users-Portfolio is a high-quality, open-source portfolio project by TeamJapanese for Japanese users, offering modern, responsive designs with smooth UI/UX and advanced animations.</p>
+        <a href="https://github.com/TeamJapanese/TheJapanese-Users-Portfolio" target="_blank">View on GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="team">
+    <h2>Team Members</h2>
+    <div class="team-container">
+      <div class="team-member">
+        <img src="img/sandeep.png" alt="Sandeep Sharma" />
+        <h3>𝚂αɴɖεερ 𝚂ʜαяɱα</h3>
+        <p>ꜰᴏᴜɴᴅᴇʀ ᴏꜰ ᴛᴇᴀᴍ ᴊᴀᴘᴀɴᴇꜱᴇ </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2 data-aos="fade-up">Contact Us</h2>
+    <form action="https://formsubmit.co/teamjapaneseofficial.com" method="POST" data-aos="fade-up">
+      <input type="text" name="name" placeholder="Name" required />
+      <input type="email" name="email" placeholder="Email" required />
+      <input type="text" name="subject" placeholder="Subject" />
+      <input type="text" name="phone" placeholder="Phone Number" />
+      <textarea name="message" placeholder="Your message..." required></textarea>
+      <button class="btn" type="submit">Send</button>
+    </form>
+  </section>
+
+<footer>
+  <div style="padding: 30px 10%; background: #0a0011; border-top: 1px solid #ff00ff40;">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; text-align: center;">
+      <div style="flex: 1 1 300px; margin-bottom: 15px;">
+        <h3 style="font-size: 1.5rem; color: #ff00ff;">Team Japanese</h3>
+        <p style="font-size: 0.9rem; color: #aaa;">Creating future-ready bots, music platforms, and automation systems with love & next-level tech.</p>
+      </div>
+      <div style="flex: 1 1 300px; margin-bottom: 15px;">
+        <h4 style="color: #fff; margin-bottom: 10px;">Follow Us</h4>
+        <a href="https://github.com/TeamJapanese" target="_blank" style="margin: 0 10px; color: #ff00ff; font-size: 1.2rem; text-decoration: none;">GitHub</a>
+        <a href="https://instagram.com/teamjapaneseofficial" target="_blank" style="margin: 0 10px; color: #ff00ff; font-size: 1.2rem; text-decoration: none;">Instagram</a>
+        <a href="https://www.threads.net/@teamjapaneseofficial" target="_blank" style="margin: 0 10px; color: #ff00ff; font-size: 1.2rem; text-decoration: none;">Threads</a>
+        <a href="https://t.me/TeamJapaneseOfficial" target="_blank" style="margin: 0 10px; color: #ff00ff; font-size: 1.2rem; text-decoration: none;">Telegram</a>
+        <a href="https://x.com/TeamJapaneseX" target="_blank" style="margin: 0 10px; color: #ff00ff; font-size: 1.2rem; text-decoration: none;">X</a>
+        <a href="https://youtube.com/@teamjapaneseofficial?si=mTb2F9up_I3USqzA" target="_blank" style="margin: 0 10px; color: #ff00ff; font-size: 1.2rem; text-decoration: none;">YouTube</a>
+      </div>
+    </div>
+    <div style="text-align: center; margin-top: 20px; font-size: 0.85rem; color: #ff00ff;">
+      &copy; 2025 <strong>Team Japanese</strong>. All Rights Reserved.
+    </div>
+  </div>
+</footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+    const text = "Team Japanese";
+    let i = 0;
+    function typeEffect() {
+      if (i < text.length) {
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeEffect, 100);
+      }
+    }
+    typeEffect();
+  </script>
+</body>
+  </html>
