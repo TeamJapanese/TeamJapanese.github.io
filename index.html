@@ -4,10 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Team Japanese </title>
-  <link rel="shortcut icon" href="img/japanese.png" type="image/png">
+  <link rel="shortcut icon" href="/img/japanese.png" type="image/png">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
     * {
       margin: 0;
@@ -198,12 +200,203 @@
         display: none;
       }
     }
+
+ @keyframes scrollTrain {
+      0% {
+        transform: translateX(0);
+      }
+      40% {
+        transform: translateX(-50%);
+      }
+      50% {
+        transform: translateX(-50%);
+      }
+      90% {
+        transform: translateX(-100%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+    @keyframes orbit {
+      from {
+        transform: rotate(0deg) translateX(var(--radius)) rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg) translateX(var(--radius)) rotate(-360deg);
+      }
+    }
+    .animate-orbit {
+      animation: orbit var(--duration, 20s) linear infinite;
+      animation-delay: var(--delay, 0s);
+      animation-direction: var(--direction, normal);
+      transform-origin: center center;
+    }
+
+    /* Updated CSS for the testimonials section */
+    #testimonials {
+      padding: 100px 10%;
+      background: linear-gradient(145deg, #0d0d0d, #1a001a);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #testimonials::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(144, 81, 227, 0.1) 0%, transparent 80%);
+      animation: rotateGlow 30s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes rotateGlow {
+      0% { transform: rotate(0deg);}
+      100% { transform: rotate(360deg);}
+    }
+
+    #testimonials::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+      opacity: 0.03;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    #testimonials h2 {
+      text-align: center;
+      font-size: 2.8em;
+      color: #d6b2ff;
+      font-family: 'Orbitron', sans-serif;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 0 25px #a020f0;
+      animation: glowIn 2s ease forwards;
+    }
+
+    #testimonials p {
+      text-align: center;
+      color: #fff;
+      font-size: 1.3rem;
+      margin-bottom: 60px;
+      position: relative;
+      z-index: 1;
+      opacity: 0.9;
+      animation: fadeInUp 1.5s ease-in-out forwards;
+    }
+
+    .testimonial-layout {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 30px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .testimonial {
+      flex: 1;
+      max-width: 360px;
+      padding: 25px;
+      border-radius: 20px;
+      background: rgba(33, 0, 66, 0.3);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(192, 128, 255, 0.2);
+      position: relative;
+      box-shadow: 0 0 25px rgba(144, 81, 227, 0.5);
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+      text-align: center;
+      animation: floatUp 2s ease-in-out both;
+    }
+
+    .testimonial:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 0 35px rgba(192, 128, 255, 0.8);
+    }
+
+    .testimonial::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: inherit;
+      background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(160,32,240,0.15));
+      z-index: -1;
+      box-shadow: 0 0 20px rgba(160,32,240,0.4);
+    }
+
+    .pic {
+      width: 95px;
+      height: 95px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid #a020f0;
+      margin: 0 auto 15px;
+      box-shadow: 0 0 15px rgba(160, 32, 240, 0.4);
+    }
+
+    .pic img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .detail .name {
+      font-size: 18px;
+      font-weight: 600;
+      color: #ffccff;
+      margin-bottom: 6px;
+    }
+
+    .detail .role {
+      font-size: 14px;
+      color: #ccc;
+      margin-bottom: 15px;
+    }
+
+    .description {
+      font-size: 14.5px;
+      line-height: 24px;
+      padding: 16px;
+      color: #eee;
+      background: rgba(144, 81, 227, 0.08);
+      border-left: 3px solid #a020f0;
+      border-radius: 8px;
+      box-shadow: inset 0 0 10px rgba(160, 32, 240, 0.2);
+    }
+
+    @keyframes glowIn {
+      0% { opacity: 0; transform: scale(0.95);}
+      100% { opacity: 1; transform: scale(1);}
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+
+    @keyframes floatUp {
+      0% { opacity: 0; transform: translateY(30px);}
+      100% { opacity: 1; transform: translateY(0);}
+    }
+
+    @media screen and (max-width: 768px) {
+      .testimonial-layout {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
   </style>
 </head>
 <body>
   <header>
     <div class="logo">
-      <img src="img/japanese.png" alt="Team Japanese Logo" class="logo-img" />
+      <img src="/img/japanese.png" alt="Team Japanese Logo" class="logo-img" />
       Team Japanese
     </div>
     <nav>
@@ -211,17 +404,61 @@
         <li><a href="#about">About</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#team">Team</a></li>
+        <li><a href="#testimonials">Message</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
   </header>
+<section class="hero">
+    <main class="min-h-[90vh] w-full antialiased flex items-center justify-center">
+    <div class="relative w-full h-full flex flex-col items-center justify-center">
+      <div class="relative w-full h-full flex items-center justify-center overflow-visible mb-8">
+<div class="relative w-1/4 filter">
+  <img src="/img/japanese.png" alt="Team-japnese-hero" class="max-w-full h-auto shadow-2xl shadow-gray-100/50 object-cover opacity-50 rounded-full"/>
+        </div>
 
-  <section class="hero">
-    <h1 class="typing" id="typing"></h1>
-    <p>Team Japanese with a vision to create the world's most advanced, high-performance Userbot ecosystem that seamlessly integrates across multiple platforms like Discord, WhatsApp, Telegram, Instagram, and Twitter, as well as expanding into cloud-based AI automation, cybersecurity, and futuristic digital solutions and also working on a horror game that will be available on both PC and mobile, delivering a terrifyingly immersive experience with stunning graphics, intense gameplay, and next-gen horror elements.
-With a passion for technology, automation, and next-generation innovations, and dedicated to making Team Japanese a leader in AI-powered automation, cybersecurity, and gaming.</p>
+ <div style="--duration:21s; --radius:120px; --delay:-21s; --direction:normal" class="absolute animate-orbit size-[30px] rounded-full bg-transparent">
+          <img src="/img/vs-code.svg" alt="VS Code" width="30" height="30"/>
+        </div>
+        <div style="--duration:21s; --radius:120px; --delay:-14s; --direction:normal" class="absolute animate-orbit size-[30px] rounded-full bg-transparent">
+          <img src="/img/github.svg" alt="GitHub" width="30" height="30" class="invert"/>
+        </div>
+        <div style="--duration:21s; --radius:120px; --delay:-7s; --direction:normal" class="absolute animate-orbit size-[30px] rounded-full bg-transparent">
+          <img src="/img/nextjs.svg" alt="Next.js" width="30" height="30" class="invert"/>
+        </div>
+
+        <div style="--duration:25s; --radius:200px; --delay:-25s; --direction:reverse" class="absolute animate-orbit size-[50px] rounded-full bg-transparent">
+          <img src="/img/python.svg" alt="Python" width="50" height="50"/>
+        </div>
+        <div style="--duration:25s; --radius:200px; --delay:-20s; --direction:reverse" class="absolute animate-orbit size-[50px] rounded-full bg-transparent">
+          <img src="/img/react.svg" alt="React" width="50" height="50"/>
+        </div>
+        <div style="--duration:25s; --radius:200px; --delay:-15s; --direction:reverse" class="absolute animate-orbit size-[50px] rounded-full bg-transparent">
+          <img src="/img/nodejs.svg" alt="Node.js" width="50" height="50"/>
+        </div>
+        <div style="--duration:25s; --radius:200px; --delay:-10s; --direction:reverse" class="absolute animate-orbit size-[50px] rounded-full bg-transparent">
+          <img src="/img/mongodb.svg" alt="MongoDB" width="50" height="50"/>
+        </div>
+        <div style="--duration:25s; --radius:200px; --delay:-5s; --direction:reverse" class="absolute animate-orbit size-[50px] rounded-full bg-transparent">
+          <img src="/img/django.svg" alt="Django" width="50" height="50"/>
+        </div>
+      </div>
+
+      <div class="relative flex flex-col items-center justify-center w-full px-10 md:pr-10 lg:pr-20 xl:pr-40 text-center">
+
+        <h1 class="text-gainsboro/80 text-xs md:text-base font-medium tracking-wide text-justify drop-shadow-sm mt-4">
+          Explore the universe of programming languages and tools orbiting around you.
+        </h1>
+        <div class="w-full flex items-center justify-center mt-6">
+          <a href="#contact" class="rounded-md text-sm font-medium border h-9 px-4 py-2 text-whitesmoke bg-gray-50/5 backdrop-blur-sm shadow-sm">
+            Explore More
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
   </section>
-
   <section id="about">
     <h2 data-aos="fade-up">About Team Japanese</h2>
     <p data-aos="fade-up">We build high-quality bots, futuristic websites, music platforms, and stunning UI/UX systems. Our mission is to become the largest tech community with high-performance and cyber-futuristic experiences.</p>
@@ -252,62 +489,111 @@ With a passion for technology, automation, and next-generation innovations, and 
     <h2>Team Members</h2>
     <div class="team-container">
       <div class="team-member">
-        <img src="img/sandeep.png" alt="Sandeep Sharma" />
+        <img src="/img/sandeep.png" alt="Sandeep Sharma" />
         <h3>𝚂αɴɖεερ 𝚂ʜαяɱα</h3>
         <p>ꜰᴏᴜɴᴅᴇʀ ᴏꜰ ᴛᴇᴀᴍ ᴊᴀᴘᴀɴᴇꜱᴇ </p>
       </div>
     </div>
   </section>
 
+  <section id="testimonials">
+    <h2 data-aos="fade-up">Developers Message</h2>
+    <p data-aos="fade-up">What people we aim for japanese userbot</p>
+
+    <div class="testimonial-layout">
+      <div class="testimonial" data-aos="zoom-in-up" data-aos-delay="100"><div class="pic">
+          <img src="img/sandeep.png" alt="Sandeep Sharma">
+        </div>
+        <div class="detail">
+          <div class="name">Sandeep Sharma</div>
+          <div class="role">Founder of Team Japanese</div>
+        </div>
+        <div class="description">“Leading the team with passion and dedication, aiming for excellence in every project.”</div>
+      </div>
+
+      <div class="testimonial" data-aos="zoom-in-up" data-aos-delay="200">
+        <div class="pic">
+          <img src="/imh/suraj.png" alt="TryToLiveAlone">
+        </div>
+        <div class="detail">
+          <div class="name">TryToLiveAlone</div>
+          <div class="role">Coder Dev</div>
+        </div>
+        <div class="description">“Creative developer, always looking for innovative solutions to problems.”</div>
+      </div>
+
+      <div class="testimonial" data-aos="zoom-in-up" data-aos-delay="300">
+        <div class="pic">
+          <img src="/img/mirza.png" alt="Mirza">
+        </div>
+        <div class="detail">
+          <div class="name">Mirza</div>
+          <div class="role">IT & Senior Developer Hacker</div>
+        </div>
+        <div class="description">“Exploring technology and pushing boundaries to achieve perfection.”</div>
+      </div>
+    </div>
+
+    <div class="testimonial-layout">
+      <div class="testimonial" data-aos="zoom-in-up" data-aos-delay="400">
+        <div class="pic">
+          <img src="/img/yash.png" alt="Yash Gupta">
+        </div>
+        <div class="detail">
+          <div class="name">Yash Gupta</div>
+          <div class="role">Pro Coder</div>
+        </div>
+        <div class="description">“A coding expert who loves solving complex problems with clean solutions.”</div>
+      </div>
+
+      <div class="testimonial" data-aos="zoom-in-up" data-aos-delay="500">
+        <div class="pic">
+          <img src="/img/abhay.png" alt="Tech Abhay">
+        </div>
+        <div class="detail">
+          <div class="name">Tech Abhay</div>
+          <div class="role">Hacker & Coder</div>
+        </div>
+        <div class="description">“Passionate about coding and hacking, always diving deep into tech.”</div>
+      </div>
+    </div>
+  </section>
+
   <section id="contact">
-    <h2 data-aos="fade-up">Contact Us</h2>
-    <form action="https://formsubmit.co/teamjapaneseofficial@gmail.com" method="POST" data-aos="fade-up">
-      <input type="text" name="name" placeholder="Name" required />
-      <input type="email" name="email" placeholder="Email" required />
-      <input type="text" name="subject" placeholder="Subject" />
-      <input type="text" name="phone" placeholder="Phone Number" />
-      <textarea name="message" placeholder="Your message..." required></textarea>
-      <button class="btn" type="submit">Send</button>
+    <h2>Contact Us</h2>
+    <form>
+      <input type="text" placeholder="Your Name" />
+      <input type="email" placeholder="Your Email" />
+      <textarea placeholder="Your Message"></textarea>
+      <button type="submit" class="btn">Send Message</button>
     </form>
   </section>
 
-<footer>
-  <div style="padding: 30px 10%; background: #0a0011; border-top: 1px solid #ff00ff40;">
-    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; text-align: center;">
-      <div style="flex: 1 1 300px; margin-bottom: 15px;">
-        <h3 style="font-size: 1.5rem; color: #ff00ff;">Team Japanese</h3>
-        <p style="font-size: 0.9rem; color: #aaa;">In Search Of NextGen</p>
-      </div>
-      <div style="flex: 1 1 300px; margin-bottom: 15px;">
-        <h4 style="color: #fff; margin-bottom: 10px;">Follow Us</h4>
-        <a href="https://github.com/TeamJapanese" target="_blank" style="margin: 0 10px; color: #ff00ff; font-size: 1.2rem; text-decoration: none;">GitHub</a>
-        <a href="https://instagram.com/teamjapaneseofficial" target="_blank" style="margin: 0 10px; color: #ff00ff; font-size: 1.2rem; text-decoration: none;">Instagram</a>
-        <a href="https://www.threads.net/@teamjapaneseofficial" target="_blank" style="margin: 0 10px; color: #ff00ff; font-size: 1.2rem; text-decoration: none;">Threads</a>
-        <a href="https://www.linkedin.com/company/teamjapanese/" target="_blank" style="margin: 0 10px; color: #ff00ff; font-size: 1.2rem; text-decoration: none;">Linkedin</a>
-        <a href="https://t.me/TeamJapaneseOfficial" target="_blank" style="margin: 0 10px; color: #ff00ff; font-size: 1.2rem; text-decoration: none;">Telegram</a>
-        <a href="https://x.com/TeamJapaneseX" target="_blank" style="margin: 0 10px; color: #ff00ff; font-size: 1.2rem; text-decoration: none;">X</a>
-        <a href="https://youtube.com/@teamjapaneseofficial?si=mTb2F9up_I3USqzA" target="_blank" style="margin: 0 10px; color: #ff00ff; font-size: 1.2rem; text-decoration: none;">YouTube</a>
-      </div>
-    </div>
-    <div style="text-align: center; margin-top: 20px; font-size: 0.85rem; color: #ff00ff;">
-      &copy; 2025 <strong>Team Japanese</strong> All Rights Reserved.
-    </div>
-  </div>
-</footer>
+  <footer>
+    &copy; 2025 Team Japanese. All Rights Reserved.
+  </footer>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    AOS.init();
-    const text = "Team Japanese";
-    let i = 0;
-    function typeEffect() {
-      if (i < text.length) {
-        document.getElementById("typing").innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typeEffect, 100);
+    AOS.init({
+      duration: 1000,
+      easing: 'ease-in-out',
+      once: true
+    });
+
+    const typingText = "Building the Future of Tech";
+    const typingElement = document.getElementById('typing');
+    let charIndex = 0;
+
+    function type() {
+      if (charIndex < typingText.length) {
+        typingElement.textContent += typingText.charAt(charIndex);
+        charIndex++;
+        setTimeout(type, 100); // Adjust speed here
       }
     }
-    typeEffect();
+
+    document.addEventListener('DOMContentLoaded', type);
   </script>
 </body>
-  </html>
+          </html>
