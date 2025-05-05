@@ -560,40 +560,54 @@
   </section>
 
   <section id="contact">
-    <h2>Contact Us</h2>
-    <form>
-      <input type="text" placeholder="Your Name" />
-      <input type="email" placeholder="Your Email" />
-      <textarea placeholder="Your Message"></textarea>
-      <button type="submit" class="btn">Send Message</button>
+    <h2 data-aos="fade-up">Contact Us</h2>
+    <form action="https://formsubmit.co/teamjapaneseofficial@gmail.com" method="POST" data-aos="fade-up">
+      <input type="text" name="name" placeholder="Name" required />
+      <input type="email" name="email" placeholder="Email" required />
+      <input type="text" name="subject" placeholder="Subject" />
+      <input type="text" name="phone" placeholder="Phone Number" />
+      <textarea name="message" placeholder="Your message..." required></textarea>
+      <button class="btn" type="submit">Send</button>
     </form>
   </section>
 
-  <footer>
-    &copy; 2025 Team Japanese. All Rights Reserved.
-  </footer>
+<footer>
+  <div style="padding: 30px 10%; background: #0a0011; border-top: 1px solid #ff00ff40;">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; text-align: center;">
+      <div style="flex: 1 1 300px; margin-bottom: 15px;">
+        <h3 style="font-size: 1.5rem; color: #ff00ff;">Team Japanese</h3>
+        <p style="font-size: 0.9rem; color: #aaa;">In Search Of NextGen</p>
+      </div>
+      <div style="flex: 1 1 300px; margin-bottom: 15px;">
+        <h4 style="color: #fff; margin-bottom: 10px;">Follow Us</h4>
+        <a href="https://github.com/TeamJapanese" target="_blank" style="margin: 0 10px; color: #ff00ff; font-size: 1.2rem; text-decoration: none;">GitHub</a>
+        <a href="https://instagram.com/teamjapaneseofficial" target="_blank" style="margin: 0 10px; color: #ff00ff; font-size: 1.2rem; text-decoration: none;">Instagram</a>
+        <a href="https://www.threads.net/@teamjapaneseofficial" target="_blank" style="margin: 0 10px; color: #ff00ff; font-size: 1.2rem; text-decoration: none;">Threads</a>
+        <a href="https://www.linkedin.com/company/teamjapanese/" target="_blank" style="margin: 0 10px; color: #ff00ff; font-size: 1.2rem; text-decoration: none;">Linkedin</a>
+        <a href="https://t.me/TeamJapaneseOfficial" target="_blank" style="margin: 0 10px; color: #ff00ff; font-size: 1.2rem; text-decoration: none;">Telegram</a>
+        <a href="https://x.com/TeamJapaneseX" target="_blank" style="margin: 0 10px; color: #ff00ff; font-size: 1.2rem; text-decoration: none;">X</a>
+        <a href="https://youtube.com/@teamjapaneseofficial?si=mTb2F9up_I3USqzA" target="_blank" style="margin: 0 10px; color: #ff00ff; font-size: 1.2rem; text-decoration: none;">YouTube</a>
+      </div>
+    </div>
+    <div style="text-align: center; margin-top: 20px; font-size: 0.85rem; color: #ff00ff;">
+      &copy; 2025 <strong>Team Japanese</strong> All Rights Reserved.
+    </div>
+  </div>
+</footer>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    AOS.init({
-      duration: 1000,
-      easing: 'ease-in-out',
-      once: true
-    });
-
-    const typingText = "Building the Future of Tech";
-    const typingElement = document.getElementById('typing');
-    let charIndex = 0;
-
-    function type() {
-      if (charIndex < typingText.length) {
-        typingElement.textContent += typingText.charAt(charIndex);
-        charIndex++;
-        setTimeout(type, 100); // Adjust speed here
+    AOS.init();
+    const text = "Team Japanese";
+    let i = 0;
+    function typeEffect() {
+      if (i < text.length) {
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeEffect, 100);
       }
     }
-
-    document.addEventListener('DOMContentLoaded', type);
+    typeEffect();
   </script>
 </body>
-          </html>
+  </html>
