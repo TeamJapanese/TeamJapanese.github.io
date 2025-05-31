@@ -3,222 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Team Japanese </title>
+  <title>Team Japanese</title>
   <link rel="shortcut icon" href="img/japanese.png" type="image/png">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-<style>
-  .social-icon {
-    color: #ff00ff;
-    font-size: 1.7rem;
-    transition: 0.3s ease-in-out;
-  }
-
-  .social-icon:hover {
-    transform: scale(1.2);
-  }
-
-  .social-icons-wrapper {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 15px;
-  }
-</style>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background: linear-gradient(135deg, #1a001f, #330033);
-      color: #fff;
-      overflow-x: hidden;
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 10%;
-      background-color: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(10px);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    .logo-img {
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-right: 10px;
-      vertical-align: middle;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      color: white;
-      font-weight: bold;
-      font-size: 20px;
-    }
-
-    nav ul {
-      display: flex;
-      gap: 20px;
-    }
-
-    nav ul li {
-      list-style: none;
-    }
-
-    nav ul li a {
-      text-decoration: none;
-      color: #fff;
-      font-weight: 500;
-      position: relative;
-    }
-
-    nav ul li a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background-color: #f0f;
-      transition: width 0.3s;
-    }
-
-    nav ul li a:hover::after {
-      width: 100%;
-    }
-
-    .hero {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 0 20px;
-      background: radial-gradient(circle, #2b0033, #1a001f);
-    }
-
-    .typing {
-      font-size: 2rem;
-      margin-bottom: 10px;
-      color: #ff80ff;
-      text-shadow: 0 0 10px #ff80ff;
-    }
-
-    section {
-      padding: 60px 10%;
-      background: rgba(0, 0, 0, 0.2);
-      border-top: 1px solid #fff2;
-    }
-
-    h2 {
-      text-align: center;
-      margin-bottom: 40px;
-      font-size: 2rem;
-      color: #fff;
-    }
-
-    .projects,
-    .team-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 30px;
-      justify-content: center;
-    }
-
-    .project,
-    .team-member {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 20px;
-      border-radius: 12px;
-      width: 280px;
-      text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .project:hover,
-    .team-member:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(255, 0, 255, 0.4);
-    }
-
-    .project a {
-      color: #f0f;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .team-member img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid #ff00cc;
-      margin-bottom: 10px;
-    }
-
-    form input,
-    form textarea {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 15px;
-      border: none;
-      border-radius: 8px;
-      background: #1a001f;
-      color: #fff;
-      outline: none;
-    }
-
-    form .btn {
-      background: #ff00cc;
-      color: #fff;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
-
-    form .btn:hover {
-      background: #e600b8;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background-color: rgba(0, 0, 0, 0.7);
-      font-size: 0.9rem;
-      border-top: 1px solid #fff2;
-    }
-
-    @media (max-width: 768px) {
-      nav ul {
-        flex-direction: column;
-        background: rgba(0, 0, 0, 0.7);
-        position: absolute;
-        top: 60px;
-        right: 10%;
-        display: none;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
@@ -238,13 +27,12 @@
 
   <section class="hero">
     <h1 class="typing" id="typing"></h1>
-    <p>Team Japanese with a vision to create the world's most advanced, high-performance Userbot ecosystem that seamlessly integrates across multiple platforms like Discord, WhatsApp, Telegram, Instagram, and Twitter, as well as expanding into cloud-based AI automation, cybersecurity, and futuristic digital solutions and also working on a horror game that will be available on both PC and mobile, delivering a terrifyingly immersive experience with stunning graphics, intense gameplay, and next-gen horror elements.
-With a passion for technology, automation, and next-generation innovations, and dedicated to making Team Japanese a leader in AI-powered automation, cybersecurity, and gaming.</p>
+    <p>Team Japanese with a vision to create the world's most advanced, high-performance Userbot ecosystem...</p>
   </section>
 
   <section id="about">
     <h2 data-aos="fade-up">About Team Japanese</h2>
-    <p data-aos="fade-up">We build high-quality bots, futuristic websites, music platforms, and stunning UI/UX systems. Our mission is to become the largest tech community with high-performance and cyber-futuristic experiences.</p>
+    <p data-aos="fade-up">We build high-quality bots, futuristic websites, music platforms, and stunning UI/UX systems...</p>
   </section>
 
   <section id="projects">
@@ -252,58 +40,53 @@ With a passion for technology, automation, and next-generation innovations, and 
     <div class="projects">
       <div class="project" data-aos="zoom-in">
         <h3>TheJapanese Userbot</h3>
-        <p>The Japanese Userbot is a next-gen multi-platform automation bot by TeamJapanese, supporting Discord, WhatsApp, Telegram, Instagram, and Twitter. Built with Python, JavaScript, Docker, and PostgreSQL, it offers fast, secure, and scalable automation with AI features—aiming to be the world’s largest and most advanced Userbot.</p>
+        <p>The Japanese Userbot is a next-gen multi-platform automation bot...</p>
         <a href="https://github.com/TeamJapanese/TheJapanese" target="_blank">View on GitHub</a>
       </div>
       <div class="project" data-aos="zoom-in">
-        <h3>1920 The Allerton Castle </h3>
-        <p>1920 The Allerton Castle is an horror game by TeamJapanese, inspired by the film 1920 and Allerton Castle, featuring dynamic scares, immersive visuals, and Unreal Engine 5.</p>
+        <h3>1920 The Allerton Castle</h3>
+        <p>1920 The Allerton Castle is a horror game by TeamJapanese...</p>
         <a href="https://github.com/TeamJapanese/1920-The-Allerton-Castle" target="_blank">View on GitHub</a>
       </div>
       <div class="project" data-aos="zoom-in">
         <h3>The Japanese User Portfolio</h3>
-        <p>TheJapanese-Users-Portfolio is a high-quality, open-source portfolio project by TeamJapanese for Japanese users, offering modern, responsive designs with smooth UI/UX and advanced animations.</p>
+        <p>TheJapanese-Users-Portfolio is a high-quality portfolio project...</p>
         <a href="https://github.com/TeamJapanese/TheJapanese-Users-Portfolio" target="_blank">View on GitHub</a>
       </div>
     </div>
   </section>
 
-<section id="team">
-  <h2>Team Members</h2>
-  <div class="team-container">
-
-    <div class="team-member">
-      <img src="img/sandeep.png" alt="Sandeep Sharma" />
-      <h3>𝚂αɴɖεερ 𝚂ʜαяɱα</h3>
-      <p>Founder & Visionary<br>Leader of Team Japanese, pioneering high-performance, futuristic developer.</p>
+  <section id="team">
+    <h2>Team Members</h2>
+    <div class="team-container">
+      <!-- Team members -->
+      <div class="team-member">
+        <img src="img/sandeep.png" alt="Sandeep Sharma" />
+        <h3>𝚂αɴɖεερ 𝚂ʜαяɱα</h3>
+        <p>Founder & Visionary</p>
+      </div>
+      <div class="team-member">
+        <img src="img/mirza.png" alt="Mirza" />
+        <h3>ᴍɪʀᴢᴀ</h3>
+        <p>IT Senior & Hacker</p>
+      </div>
+      <div class="team-member">
+        <img src="img/suraj.png" alt="Suraj" />
+        <h3>ꜱᴜʀᴀᴊ</h3>
+        <p>Developer</p>
+      </div>
+      <div class="team-member">
+        <img src="img/abhay.png" alt="TeCh X Abhay" />
+        <h3>𝙏𝙚𝘾𝙝 ꭗ‌ 𝘼𝙗𝙝𝙖𝙮</h3>
+        <p>Hacker & Legal Guard</p>
+      </div>
+      <div class="team-member">
+        <img src="img/yash.png" alt="Yash Gupta" />
+        <h3>Yᴀꜱʜ Gᴜᴘᴛᴀ</h3>
+        <p>Full Stack Dev</p>
+      </div>
     </div>
-
-    <div class="team-member">
-      <img src="img/mirza.png" alt="Mirza" />
-      <h3>ᴍɪʀᴢᴀ</h3>
-      <p>IT Senior & Hacker<br>Cybersecurity expert and architect of secure, powerful systems.</p>
-    </div>
-
-    <div class="team-member">
-      <img src="img/suraj.png" alt="Suraj" />
-      <h3>ꜱᴜʀᴀᴊ</h3>
-      <p>Developer<br>Innovative coder delivering efficient, clean, and impactful solutions.</p>
-    </div>
-
-    <div class="team-member">
-      <img src="img/abhay.png" alt="TeCh X Abhay" />
-      <h3>𝙏𝙚𝘾𝙝 ꭗ‌ 𝘼𝙗𝙝𝙖𝙮</h3>
-      <p>Hacker & Legal Guard<br>Protects digital rights with deep hacking and copyright expertise.</p>
-    </div>
-
-    <div class="team-member">
-      <img src="img/yash.png" alt="Yash Gupta" />
-      <h3>Yᴀꜱʜ Gᴜᴘᴛᴀ</h3>
-      <p>Full Stack Dev<br>Builds seamless, scalable apps from UI to backend.</p>
-    </div>
-
-  </div>
-</section>
+  </section>
 
   <section id="contact">
     <h2 data-aos="fade-up">Contact Us</h2>
@@ -317,45 +100,28 @@ With a passion for technology, automation, and next-generation innovations, and 
     </form>
   </section>
 
-<footer>
-  <div style="padding: 30px 10%; background: #0a0011; border-top: 1px solid #ff00ff40;">
-    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; text-align: center;">
-      <div style="flex: 1 1 300px; margin-bottom: 15px;">
-        <h3 style="font-size: 1.5rem; color: #ff00ff;">Team Japanese</h3>
-        <p style="font-size: 0.9rem; color: #aaa;">In Search Of NextGen</p>
+  <footer>
+    <div class="footer-container">
+      <div>
+        <h3>Team Japanese</h3>
+        <p>In Search Of NextGen</p>
       </div>
-      <div style="flex: 1 1 300px; margin-bottom: 15px;">
-       <h4 style="color: #fff; margin-bottom: 10px; text-align: center;">Follow Us</h4>
-     <div class="social-icons-wrapper">
-        <a href="https://github.com/TeamJapanese" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
-        <a href="https://instagram.com/teamjapaneseofficial" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.threads.net/@teamjapaneseofficial" target="_blank" class="social-icon"><i class="fab fa-threads"></i></a>
-        <a href="https://www.linkedin.com/company/teamjapanese/" target="_blank" class="social-icon"><i class="fab fa-linkedin"></i></a>
-        <a href="https://t.me/TeamJapaneseOfficial" target="_blank" class="social-icon"><i class="fab fa-telegram"></i></a>
-        <a href="https://x.com/TeamJapaneseX" target="_blank" class="social-icon"><i class="fab fa-x-twitter"></i></a>
-        <a href="https://youtube.com/@teamjapaneseofficial?si=mTb2F9up_I3USqzA" target="_blank" class="social-icon"><i class="fab fa-youtube"></i></a>
-      </div>
+      <div>
+        <h4>Follow Us</h4>
+        <div class="social-icons-wrapper">
+          <a href="https://github.com/TeamJapanese" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
+          <a href="https://instagram.com/teamjapaneseofficial" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.threads.net/@teamjapaneseofficial" target="_blank" class="social-icon"><i class="fab fa-threads"></i></a>
+          <a href="https://www.linkedin.com/company/teamjapanese/" target="_blank" class="social-icon"><i class="fab fa-linkedin"></i></a>
+        </div>
       </div>
     </div>
-    <div style="text-align: center; margin-top: 20px; font-size: 0.85rem; color: #ff00ff;">
-      &copy; 2025 <strong>Team Japanese</strong> All Rights Reserved.
-    </div>
-  </div>
-</footer>
+  </footer>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init();
-    const text = "Team Japanese";
-    let i = 0;
-    function typeEffect() {
-      if (i < text.length) {
-        document.getElementById("typing").innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typeEffect, 100);
-      }
-    }
-    typeEffect();
   </script>
+  <script src="script.js"></script>
 </body>
-  </html>
+</html>
