@@ -9,8 +9,189 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: linear-gradient(135deg, #1a0000, #330000);
+    color: #fff;
+    overflow-x: hidden;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .logo-img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  nav ul {
+    display: flex;
+    gap: 20px;
+  }
+
+  nav ul li {
+    list-style: none;
+  }
+
+  nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    position: relative;
+  }
+
+  nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #cc0000;
+    transition: width 0.3s;
+  }
+
+  nav ul li a:hover::after {
+    width: 100%;
+  }
+
+  .hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+    background: radial-gradient(circle, #400000, #1a0000);
+  }
+
+  .typing {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #ff4d4d;
+    text-shadow: 0 0 10px #cc0000;
+  }
+
+  section {
+    padding: 60px 10%;
+    background: rgba(0, 0, 0, 0.3);
+    border-top: 1px solid #fff2;
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2rem;
+    color: #fff;
+  }
+
+  .projects,
+  .team-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+  }
+
+  .project,
+  .team-member {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 12px;
+    width: 280px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .project:hover,
+  .team-member:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(204, 0, 0, 0.5);
+  }
+
+  .project a {
+    color: #cc0000;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .team-member img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #990000;
+    margin-bottom: 10px;
+  }
+
+  form input,
+  form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 8px;
+    background: #330000;
+    color: #fff;
+    outline: none;
+  }
+
+  form .btn {
+    background: #cc0000;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+  }
+
+  form .btn:hover {
+    background: #990000;
+  }
+
+  footer {
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    font-size: 0.9rem;
+    border-top: 1px solid #ffdddd30;
+  }
+
   .social-icon {
-    color: #ff00ff;
+    color: #cc0000;
     font-size: 1.7rem;
     transition: 0.3s ease-in-out;
   }
@@ -25,200 +206,18 @@
     flex-wrap: wrap;
     gap: 15px;
   }
-</style>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background: linear-gradient(135deg, #1a001f, #330033);
-      color: #fff;
-      overflow-x: hidden;
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 10%;
-      background-color: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(10px);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    .logo-img {
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-right: 10px;
-      vertical-align: middle;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      color: white;
-      font-weight: bold;
-      font-size: 20px;
-    }
-
+  @media (max-width: 768px) {
     nav ul {
-      display: flex;
-      gap: 20px;
-    }
-
-    nav ul li {
-      list-style: none;
-    }
-
-    nav ul li a {
-      text-decoration: none;
-      color: #fff;
-      font-weight: 500;
-      position: relative;
-    }
-
-    nav ul li a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background-color: #f0f;
-      transition: width 0.3s;
-    }
-
-    nav ul li a:hover::after {
-      width: 100%;
-    }
-
-    .hero {
-      height: 100vh;
-      display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 0 20px;
-      background: radial-gradient(circle, #2b0033, #1a001f);
+      background: rgba(0, 0, 0, 0.8);
+      position: absolute;
+      top: 60px;
+      right: 10%;
+      display: none;
     }
-
-    .typing {
-      font-size: 2rem;
-      margin-bottom: 10px;
-      color: #ff80ff;
-      text-shadow: 0 0 10px #ff80ff;
-    }
-
-    section {
-      padding: 60px 10%;
-      background: rgba(0, 0, 0, 0.2);
-      border-top: 1px solid #fff2;
-    }
-
-    h2 {
-      text-align: center;
-      margin-bottom: 40px;
-      font-size: 2rem;
-      color: #fff;
-    }
-
-    .projects,
-    .team-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 30px;
-      justify-content: center;
-    }
-
-    .project,
-    .team-member {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 20px;
-      border-radius: 12px;
-      width: 280px;
-      text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .project:hover,
-    .team-member:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(255, 0, 255, 0.4);
-    }
-
-    .project a {
-      color: #f0f;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .team-member img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid #ff00cc;
-      margin-bottom: 10px;
-    }
-
-    form input,
-    form textarea {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 15px;
-      border: none;
-      border-radius: 8px;
-      background: #1a001f;
-      color: #fff;
-      outline: none;
-    }
-
-    form .btn {
-      background: #ff00cc;
-      color: #fff;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
-
-    form .btn:hover {
-      background: #e600b8;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background-color: rgba(0, 0, 0, 0.7);
-      font-size: 0.9rem;
-      border-top: 1px solid #fff2;
-    }
-
-    @media (max-width: 768px) {
-      nav ul {
-        flex-direction: column;
-        background: rgba(0, 0, 0, 0.7);
-        position: absolute;
-        top: 60px;
-        right: 10%;
-        display: none;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
   <header>
@@ -318,25 +317,31 @@ With a passion for technology, automation, and next-generation innovations, and 
   </section>
 
 <footer>
-  <div style="padding: 30px 10%; background: #0a0011; border-top: 1px solid #ff00ff40;">
-    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; text-align: center;">
-      <div style="flex: 1 1 300px; margin-bottom: 15px;">
-        <h3 style="font-size: 1.5rem; color: #ff00ff;">Team Japanese</h3>
-        <p style="font-size: 0.9rem; color: #aaa;">In Search Of NextGen</p>
+  <div style="padding: 40px 10%; background: linear-gradient(to right, #1a0000, #330000); border-top: 1px solid #660000;">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; text-align: center; color: #fff;">
+      
+      <!-- Left Section -->
+      <div style="flex: 1 1 300px; margin-bottom: 20px;">
+        <h3 style="font-size: 1.8rem; color: #cc0000; text-shadow: 0 0 8px #660000;">Team Japanese</h3>
+        <p style="font-size: 0.95rem; color: #ddd;">In Search Of NextGen</p>
       </div>
-      <div style="flex: 1 1 300px; margin-bottom: 15px;">
-       <h4 style="color: #fff; margin-bottom: 10px; text-align: center;">Follow Us</h4>
-     <div class="social-icons-wrapper">
-        <a href="https://github.com/TeamJapanese" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
-        <a href="https://instagram.com/teamjapaneseofficial" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.threads.net/@teamjapaneseofficial" target="_blank" class="social-icon"><i class="fab fa-threads"></i></a>
-        <a href="https://t.me/TeamJapaneseOfficial" target="_blank" class="social-icon"><i class="fab fa-telegram"></i></a>
-        <a href="https://x.com/TeamJapaneseX" target="_blank" class="social-icon"><i class="fab fa-x-twitter"></i></a>
-        <a href="https://youtube.com/@teamjapaneseofficial?si=mTb2F9up_I3USqzA" target="_blank" class="social-icon"><i class="fab fa-youtube"></i></a>
-      </div>
+
+      <!-- Right Section -->
+      <div style="flex: 1 1 300px; margin-bottom: 20px;">
+        <h4 style="color: #fff; margin-bottom: 12px; text-align: center; font-weight: bold;">Follow Us</h4>
+        <div class="social-icons-wrapper">
+          <a href="https://github.com/TeamJapanese" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
+          <a href="https://instagram.com/teamjapaneseofficial" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.threads.net/@teamjapaneseofficial" target="_blank" class="social-icon"><i class="fab fa-threads"></i></a>
+          <a href="https://t.me/TeamJapaneseOfficial" target="_blank" class="social-icon"><i class="fab fa-telegram"></i></a>
+          <a href="https://x.com/TeamJapaneseX" target="_blank" class="social-icon"><i class="fab fa-x-twitter"></i></a>
+          <a href="https://youtube.com/@teamjapaneseofficial?si=mTb2F9up_I3USqzA" target="_blank" class="social-icon"><i class="fab fa-youtube"></i></a>
+        </div>
       </div>
     </div>
-    <div style="text-align: center; margin-top: 20px; font-size: 0.85rem; color: #ff00ff;">
+
+    <!-- Bottom Copyright -->
+    <div style="text-align: center; margin-top: 25px; font-size: 0.85rem; color: #cc0000; text-shadow: 0 0 6px #330000;">
       &copy; 2025 <strong>Team Japanese</strong> All Rights Reserved.
     </div>
   </div>
