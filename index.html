@@ -9,6 +9,103 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
+  /* Loading Screen Styles */
+  #preloader {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, #0a0a0a, #000);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 9999;
+  animation: fadeOut 1s ease 4.5s forwards;
+}
+
+.japanese-text {
+  font-size: 3.8rem;
+  color: #ff0040;
+  text-shadow:
+    0 0 10px #ff0033,
+    0 0 30px #ff0033,
+    0 0 60px #ff0033;
+  transform: scale(0.7);
+  opacity: 0;
+  animation: glowText 1.8s ease-in-out 0.6s forwards;
+}
+
+.katana-slash {
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(to right, transparent, #ff0033, transparent);
+  box-shadow: 0 0 10px #ff0033;
+  transform: scaleX(0);
+  transform-origin: center;
+  margin-top: 30px;
+  animation: katanaStrike 0.6s ease-in-out 2.4s forwards;
+}
+
+.particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.particles span {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: #ff0033;
+  box-shadow: 0 0 10px #ff0033;
+  border-radius: 50%;
+  animation: float 7s linear infinite;
+}
+.particles span:nth-child(even) {
+  animation-duration: 9s;
+}
+
+@keyframes glowText {
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes katanaStrike {
+  0% {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scaleX(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+@keyframes float {
+  0% {
+    transform: translateY(100vh) scale(0.5);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-10vh) scale(1);
+    opacity: 0;
+  }
+}
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+  }
+  
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
   * {
@@ -220,6 +317,11 @@
 </style>
 </head>
 <body>
+ <div id="preloader">
+  <div class="particles" id="particles"></div>
+  <div class="japanese-text">チームジャパニーズ</div>
+  <div class="katana-slash"></div>
+ </div>
   <header>
     <div class="logo">
       <img src="img/japanese.png" alt="Team Japanese Logo" class="logo-img" />
@@ -234,7 +336,6 @@
       </ul>
     </nav>
   </header>
-
   <section class="hero">
     <h1 class="typing" id="typing"></h1>
     <p>Team Japanese with a vision to create the world's most advanced, high-performance Userbot ecosystem that seamlessly integrates across multiple platforms like Discord, WhatsApp, Telegram, Instagram, and Twitter, as well as expanding into cloud-based AI automation, cybersecurity, and futuristic digital solutions and also working on a horror game that will be available on both PC and mobile, delivering a terrifyingly immersive experience with stunning graphics, intense gameplay, and next-gen horror elements.
@@ -346,7 +447,20 @@ With a passion for technology, automation, and next-generation innovations, and 
     </div>
   </div>
 </footer>
+  <script>
+  const particlesContainer = document.getElementById('particles');
+  for (let i = 0; i < 50; i++) {
+    const dot = document.createElement('span');
+    dot.style.left = `${Math.random() * 100}%`;
+    dot.style.animationDelay = `${Math.random() * 6}s`;
+    dot.style.animationDuration = `${4 + Math.random() * 4}s`;
+    particlesContainer.appendChild(dot);
+  }
 
+  setTimeout(() => {
+    document.getElementById("preloader").style.display = "none";
+  }, 4600);
+   </script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init();
