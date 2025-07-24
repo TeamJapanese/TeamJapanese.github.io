@@ -542,21 +542,13 @@ With a passion for technology, automation, and next-generation innovations, and 
   }, 4600);
    </script>
   <script>
-  function showPopup() {
-    document.getElementById('popupCard').classList.remove('hidden');
+  function openPopup() {
+    document.getElementById("popupCard").classList.remove("hidden");
   }
 
   function closePopup() {
-    document.getElementById('popupCard').classList.add('hidden');
+    document.getElementById("popupCard").classList.add("hidden");
   }
-
-  // Optional: Close when clicking outside the popup
-  window.addEventListener('click', function(event) {
-    const popup = document.getElementById('popupCard');
-    if (event.target === popup) {
-      closePopup();
-    }
-  });
   </script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
