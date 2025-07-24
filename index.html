@@ -306,6 +306,48 @@
   .hidden {
   display: none;
   }
+  .popup {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+.popup.hidden {
+  display: none;
+}
+.popup-content {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  padding: 2rem;
+  border-radius: 20px;
+  color: white;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 0 20px #ff0033;
+  position: relative;
+}
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.socials a {
+  margin: 0 10px;
+  color: #ff4d4d;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.socials a:hover {
+  color: #fff;
+  text-shadow: 0 0 5px #ff0033;
+}
 
   @media (max-width: 768px) {
     nav ul {
