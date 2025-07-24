@@ -303,6 +303,9 @@
     flex-wrap: wrap;
     gap: 15px;
   }
+  .hidden {
+  display: none;
+  }
 
   @media (max-width: 768px) {
     nav ul {
@@ -322,6 +325,20 @@
   <div class="japanese-text">チームジャパニーズ</div>
   <div class="katana-slash"></div>
  </div>
+  <!-- Sandeep Popup Card -->
+<div id="popupCard" class="popup hidden" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+background: rgba(0,0,0,0.9); padding: 30px; border-radius: 15px; z-index: 9999; color: #fff; width: 90%; max-width: 400px;">
+  <div class="popup-content">
+    <span class="close-btn" onclick="closePopup()" style="position: absolute; top: 10px; right: 15px; font-size: 1.5rem; cursor: pointer;">×</span>
+    <h2 style="color: #cc0000;">sᴧɴᴅᴇᴇᴘ sʜᴧʀᴍᴧ</h2>
+    <p>Founder & Visionary of Team Japanese.<br>Frontend Developer, UI/UX Designer, and Passionate Technologist.</p>
+    <p>Email: sandeepshrmadev@gmail.com</p>
+    <div class="socials" style="margin-top: 15px;">
+      <a href="https://github.com/itzsandeepshrma" target="_blank" style="color: #fff; margin-right: 10px;">GitHub</a>
+      <a href="https://instagram.com/itz_sandeep_shrma" target="_blank" style="color: #fff;">Instagram</a>
+    </div>
+  </div>
+</div>
   <header>
     <div class="logo">
       <img src="img/japanese.png" alt="Team Japanese Logo" class="logo-img" />
@@ -374,7 +391,7 @@ With a passion for technology, automation, and next-generation innovations, and 
 
     <div class="team-member">
       <img src="img/sandeep.png" alt="Sandeep Sharma" />
-      <h3>sᴧɴᴅᴇᴇᴘ sʜᴧʀᴍᴧ</h3>
+      <h3><span id="name" onclick="showPopup()">sᴧɴᴅᴇᴇᴘ sʜᴧʀᴍᴧ</span></h3>
       <p>Founder & Visionary<br>Leader of Team Japanese, pioneering high-performance, futuristic developer.</p>
     </div>
 
@@ -461,6 +478,15 @@ With a passion for technology, automation, and next-generation innovations, and 
     document.getElementById("preloader").style.display = "none";
   }, 4600);
    </script>
+  <script>
+  function showPopup() {
+    document.getElementById("popupCard").classList.remove("hidden");
+  }
+
+  function closePopup() {
+    document.getElementById("popupCard").classList.add("hidden");
+  }
+  </script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init();
