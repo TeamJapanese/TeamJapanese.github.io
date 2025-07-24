@@ -367,19 +367,36 @@
   <div class="japanese-text">チームジャパニーズ</div>
   <div class="katana-slash"></div>
  </div>
-  <!-- Sandeep Popup Card -->
+<!-- Sandeep Popup Card -->
 <div id="popupCard" class="popup hidden" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-background: rgba(0,0,0,0.9); padding: 30px; border-radius: 15px; z-index: 9999; color: #fff; width: 90%; max-width: 400px;">
-  <div class="popup-content">
+background: rgba(20, 20, 20, 0.95); padding: 30px; border-radius: 15px; z-index: 9999; color: #fff; width: 90%; max-width: 400px; box-shadow: 0 0 20px red;">
+  <div class="popup-content" style="text-align: center; position: relative;">
     <span class="close-btn" onclick="closePopup()" style="position: absolute; top: 10px; right: 15px; font-size: 1.5rem; cursor: pointer;">×</span>
-    <h2 style="color: #cc0000;">sᴧɴᴅᴇᴇᴘ sʜᴧʀᴍᴧ</h2>
-    <p>Founder & Visionary of Team Japanese.<br>Frontend Developer, UI/UX Designer, and Passionate Technologist.</p>
-    <p>Email: sandeepshrmadev@gmail.com</p>
-    <div class="socials" style="margin-top: 15px;">
-      <a href="https://github.com/itzsandeepshrma" target="_blank" style="color: #fff; margin-right: 10px;">GitHub</a>
-      <a href="https://instagram.com/itz_sandeep_shrma" target="_blank" style="color: #fff;">Instagram</a>
+    
+    <!-- Profile Image -->
+    <img src="img/sandeep.png" alt="Sandeep Sharma" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 15px; border: 2px solid red;" />
+
+    <!-- Name -->
+    <h2 style="color: #ff0000; margin-bottom: 10px;">sᴧɴᴅᴇᴇᴘ sʜᴧʀᴍᴧ</h2>
+
+    <!-- Description -->
+    <p style="font-size: 0.95rem;">
+      Founder & Visionary of Team Japanese.<br>
+      Frontend Developer, UI/UX Designer, and Passionate Technologist.
+    </p>
+    <p>Email: <a href="mailto:sandeepshrmadev@gmail.com" style="color: #fff;">sandeepshrmadev@gmail.com</a></p>
+
+    <!-- Social Icons -->
+    <div class="socials" style="margin-top: 15px; display: flex; justify-content: center; gap: 20px;">
+      <a href="https://github.com/itzsandeepshrma" target="_blank" style="color: #fff;">
+        <i class="fab fa-github fa-lg"></i>
+      </a>
+      <a href="https://instagram.com/itz_sandeep_shrma" target="_blank" style="color: #fff;">
+        <i class="fab fa-instagram fa-lg"></i>
+      </a>
     </div>
   </div>
+</div>
 </div>
   <header>
     <div class="logo">
@@ -522,12 +539,20 @@ With a passion for technology, automation, and next-generation innovations, and 
    </script>
   <script>
   function showPopup() {
-    document.getElementById("popupCard").classList.remove("hidden");
+    document.getElementById('popupCard').classList.remove('hidden');
   }
 
   function closePopup() {
-    document.getElementById("popupCard").classList.add("hidden");
+    document.getElementById('popupCard').classList.add('hidden');
   }
+
+  // Optional: Close when clicking outside the popup
+  window.addEventListener('click', function(event) {
+    const popup = document.getElementById('popupCard');
+    if (event.target === popup) {
+      closePopup();
+    }
+  });
   </script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
