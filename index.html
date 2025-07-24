@@ -314,6 +314,104 @@
       display: none;
     }
   }
+  /* Profile Popup Styles */
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+  transition: opacity 0.4s ease;
+}
+
+.popup-overlay.hidden {
+  display: none;
+}
+
+.popup-card {
+  background: #1a0000;
+  border: 2px solid #cc0000;
+  padding: 30px 25px;
+  border-radius: 20px;
+  text-align: center;
+  color: #fff;
+  position: relative;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 0 20px #cc0000aa;
+  animation: popupFade 0.5s ease forwards;
+}
+
+.popup-card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #cc0000;
+  margin-bottom: 15px;
+}
+
+.popup-card h2 {
+  font-size: 1.8rem;
+  color: #ff4d4d;
+  margin-bottom: 8px;
+}
+
+.popup-card p {
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+}
+
+.popup-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #ff4d4d;
+  transition: 0.3s;
+}
+
+.popup-close:hover {
+  color: #fff;
+}
+
+.popup-socials {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  font-size: 1.4rem;
+}
+
+.popup-socials a {
+  color: #cc0000;
+  transition: 0.3s;
+}
+
+.popup-socials a:hover {
+  transform: scale(1.3);
+  color: #fff;
+}
+
+@keyframes popupFade {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+  .team-member h3:hover {
+  color: #ff0033;
+  text-shadow: 0 0 8px #ff0033;
+  }
+  
+
+  
 </style>
 </head>
 <body>
@@ -322,6 +420,21 @@
   <div class="japanese-text">チームジャパニーズ</div>
   <div class="katana-slash"></div>
  </div>
+  <!-- Profile Popup -->
+<div id="profilePopup" class="popup-overlay hidden">
+  <div class="popup-card" data-aos="zoom-in">
+    <span class="popup-close" onclick="closeProfilePopup()">×</span>
+    <img src="img/sandeep.png" alt="Sandeep Sharma">
+    <h2>sᴧɴᴅᴇᴇᴘ sʜᴧʀᴍᴧ</h2>
+    <p>Founder & Visionary of Team Japanese</p>
+    <p>Passionate about automation, AI, cybersecurity, UI/UX, and gaming. Dedicated to building the next-gen userbot & horror games.</p>
+    <div class="popup-socials">
+      <a href="https://github.com/itzsandeepshrma" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="https://instagram.com/itz_sandeep_shrma" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="mailto:sandeepshrmadev@gmail.com"><i class="fas fa-envelope"></i></a>
+    </div>
+  </div>
+</div>
   <header>
     <div class="logo">
       <img src="img/japanese.png" alt="Team Japanese Logo" class="logo-img" />
@@ -474,6 +587,22 @@ With a passion for technology, automation, and next-generation innovations, and 
       }
     }
     typeEffect();
+  </script>
+  <script>
+  // Open popup when user clicks name
+  document.addEventListener("DOMContentLoaded", () => {
+    const nameElement = [...document.querySelectorAll("h3")].find(el => el.textContent.includes("sᴧɴᴅᴇᴇᴘ"));
+    if (nameElement) {
+      nameElement.style.cursor = "pointer";
+      nameElement.addEventListener("click", () => {
+        document.getElementById("profilePopup").classList.remove("hidden");
+      });
+    }
+  });
+
+  function closeProfilePopup() {
+    document.getElementById("profilePopup").classList.add("hidden");
+  }
   </script>
 </body>
 </html>
