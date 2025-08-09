@@ -409,56 +409,9 @@
   color: #ff0033;
   text-shadow: 0 0 8px #ff0033;
   }
-  /* Hamburger button - hidden on desktop */
-#menu-toggle {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 1.8rem;
-  color: #cc0000;
-  cursor: pointer;
-  z-index: 1100; /* above nav */
-}
+  
 
-/* Mobile styles */
-@media (max-width: 768px) {
-  nav ul {
-    flex-direction: column;
-    background: rgba(0, 0, 0, 0.8);
-    position: absolute;
-    top: 60px;
-    right: 10%;
-    display: none;
-    border-radius: 8px;
-    padding: 10px 15px;
-    width: 180px;
-  }
-
-  nav ul.active {
-    display: flex;
-  }
-
-  #menu-toggle {
-    display: block;
-  }
-  :root {
-  --primary-red: #cc0000;
-  --primary-dark: #1a0000;
-  --background-dark-start: #1a0000;
-  --background-dark-end: #330000;
-  --text-color: #fff;
-  --font-main: 'Poppins', sans-serif;
-  }
-  body {
-  background: linear-gradient(135deg, var(--background-dark-start), var(--background-dark-end));
-  color: var(--text-color);
-  font-family: var(--font-main);
-}
-header {
-  background-color: rgba(0, 0, 0, 0.7);
-}
-
-
+  
 </style>
 </head>
 <body>
@@ -470,7 +423,7 @@ header {
   <!-- Profile Popup -->
 <div id="profilePopup" class="popup-overlay hidden">
   <div class="popup-card" data-aos="zoom-in">
-    <button class="popup-close" aria-label="Close Profile Popup" onclick="closeProfilePopup()">×</button>
+    <span class="popup-close" onclick="closeProfilePopup()">×</span>
     <img src="img/sandeep.png" alt="Sandeep Sharma">
     <h2>sᴧɴᴅᴇᴇᴘ sʜᴧʀᴍᴧ</h2>
     <p>Founder & Visionary of Team Japanese</p>
@@ -490,11 +443,8 @@ header {
       <img src="img/japanese.png" alt="Team Japanese Logo" class="logo-img" />
       Team Japanese
     </div>
-    <button id="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
-  <i class="fas fa-bars"></i>
-    </button>
     <nav>
-      <ul id="nav-menu">
+      <ul>
         <li><a href="#about">About</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#team">Team</a></li>
@@ -547,18 +497,16 @@ With a passion for technology, automation, and next-generation innovations, and 
 </section>
 
   <section id="contact">
-  <h2 data-aos="fade-up">Contact Us</h2>
-  <form id="contactForm" action="https://formsubmit.co/teamjapaneseofficial@gmail.com" method="POST" data-aos="fade-up">
-    <input type="text" name="name" placeholder="Name" required />
-    <input type="email" name="email" placeholder="Email" required />
-    <input type="text" name="subject" placeholder="Subject" />
-    <input type="text" name="phone" placeholder="Phone Number" />
-    <textarea name="message" placeholder="Your message..." required></textarea>
-    <button class="btn" type="submit">Send</button>
-  </form>
-
-  <div id="formMessage" style="color: #cc0000; text-align: center; margin-top: 10px;"></div>
-</section>
+    <h2 data-aos="fade-up">Contact Us</h2>
+    <form action="https://formsubmit.co/teamjapaneseofficial@gmail.com" method="POST" data-aos="fade-up">
+      <input type="text" name="name" placeholder="Name" required />
+      <input type="email" name="email" placeholder="Email" required />
+      <input type="text" name="subject" placeholder="Subject" />
+      <input type="text" name="phone" placeholder="Phone Number" />
+      <textarea name="message" placeholder="Your message..." required></textarea>
+      <button class="btn" type="submit">Send</button>
+    </form>
+  </section>
 
 <footer>
   <div style="padding: 40px 10%; background: linear-gradient(to right, #1a0000, #330000); border-top: 1px solid #660000;">
@@ -634,62 +582,6 @@ With a passion for technology, automation, and next-generation innovations, and 
   function closeProfilePopup() {
     document.getElementById("profilePopup").classList.add("hidden");
   }
-    // Close popup on outside click
-document.getElementById('profilePopup').addEventListener('click', (e) => {
-  if (e.target === e.currentTarget) {
-    closeProfilePopup();
-  }
-});
-
-// Close popup on ESC key
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    closeProfilePopup();
-  }
-});
-    const toggleButton = document.getElementById('menu-toggle');
-const navMenu = document.getElementById('nav-menu');
-
-toggleButton.addEventListener('click', () => {
-  const expanded = toggleButton.getAttribute('aria-expanded') === 'true' || false;
-  toggleButton.setAttribute('aria-expanded', !expanded);
-  navMenu.classList.toggle('active');
-});
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-  e.preventDefault(); // prevent default form submission
-
-  // Simple client validation example
-  const email = this.email.value;
-  if (!email.includes('@')) {
-    alert('Please enter a valid email.');
-    return;
-  }
-
-  // Submit the form data via fetch or fallback to original submit:
-  document.getElementById('contactForm').addEventListener('submit', function(e) {
-  e.preventDefault();  // Prevent default form submission
-
-  fetch(this.action, {
-    method: 'POST',
-    body: new FormData(this),
-  }).then(response => {
-    if (response.ok) {
-      document.getElementById('formMessage').textContent = 'Message sent successfully!';
-      this.reset();
-    } else {
-      document.getElementById('formMessage').textContent = 'Failed to send message.';
-    }
-    // 4 seconds
-    setTimeout(() => {
-      document.getElementById('formMessage').textContent = '';
-    }, 4000);
-  }).catch(() => {
-    document.getElementById('formMessage').textContent = 'Failed to send message.';
-    setTimeout(() => {
-      document.getElementById('formMessage').textContent = '';
-    }, 4000);
-  });
-});
   </script>
 </body>
-    </html>
+</html>
