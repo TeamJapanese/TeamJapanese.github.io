@@ -601,13 +601,9 @@ With a passion for technology, automation, and next-generation innovations, and 
     particlesContainer.appendChild(dot);
   }
 
-  window.addEventListener('load', () => {
-  const preloader = document.getElementById('preloader');
-  preloader.style.animation = 'fadeOut 1s ease forwards';
   setTimeout(() => {
-    preloader.style.display = 'none';
-  }, 4500);
-});
+    document.getElementById("preloader").style.display = "none";
+  }, 4600);
    </script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
@@ -670,6 +666,9 @@ toggleButton.addEventListener('click', () => {
   }
 
   // Submit the form data via fetch or fallback to original submit:
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();  // Prevent default form submission
+
   fetch(this.action, {
     method: 'POST',
     body: new FormData(this),
@@ -680,8 +679,15 @@ toggleButton.addEventListener('click', () => {
     } else {
       document.getElementById('formMessage').textContent = 'Failed to send message.';
     }
+    // 4 seconds
+    setTimeout(() => {
+      document.getElementById('formMessage').textContent = '';
+    }, 4000);
   }).catch(() => {
     document.getElementById('formMessage').textContent = 'Failed to send message.';
+    setTimeout(() => {
+      document.getElementById('formMessage').textContent = '';
+    }, 4000);
   });
 });
   </script>
