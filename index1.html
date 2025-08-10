@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Team Japanese — NextGen</title>
+  <meta name="description" content="Team Japanese - next-gen userbot, AI automation, cybersecurity, and horror gaming." />
+  <link rel="shortcut icon" href="img/japanese.png" type="image/png">
+
+  <!-- external libs -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+  /* ---------- Fonts & reset ---------- */
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap');
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  html, body {
+    height: 100%;
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #100000, #2b0000);
+    color: #f7f3f3;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    transition: background 0.5s ease, color 0.5s ease;
+  }
+  body.light {
+    background: linear-gradient(135deg, #f7f0f0, #ffd6d6);
+    color: #2b0000;
+  }
+  /* Scroll Progress Bar */
+  #scrollProgress {
+    position: fixed;
+    top: 0; left: 0;
+    width: 0%;
+    height: 4px;
+    background: linear-gradient(90deg, #ff2b4d, #ff6b6b);
+    z-index: 15000;
+    transition: width 0.2s ease;
+  }
+
+  /* ---------- PRELOADER ---------- */
+  #preloader {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 0, 0, 0.05), rgba(0, 0, 0, 1));
+    z-index: 99999;
+    backdrop-filter: blur(2px);
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+  }
+  #preloader.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .japanese-text {
+    font-size: 3.6rem;
+    line-height: 1;
+    color: #ff2b4d;
+    text-shadow: 0 0 8px #ff2b4d, 0 0 30px rgba(255, 0, 51, 0.15);
+    transform: scale(0.85);
+    opacity: 0;
+    animation: preText 1.2s cubic-bezier(0.2, 0.9, 0.2, 1) 0.4s forwards;
+    letter-spacing: 2px;
+  }
+  .katana-slash {
+    width: 70%;
+    height: 3px;
+    margin-top: 26px;
+    background: linear-gradient(90deg, transparent, #ff1d3a, transparent);
+    box-shadow: 0 0 18px rgba(255, 29, 58, 0.45);
+    transform: scaleX(0);
+    transform-origin: center;
+    opacity: 0;
+    animation: katana 0.55s ease 0.9s forwards;
+  }
+  .pre-controls {
+    margin-top: 18px;
+    opacity: 0.85;
+    font-size: 0.95rem;
+    color: #ffd6dc;
+  }
+  .pre-particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .pre-particles span {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #ff2b4d;
+    box-shadow: 0 0 10px rgba(255, 43, 77, 0.8);
+    opacity: 0;
+    transform: translateY(0) scale(0.6);
+    animation: preFloat linear infinite;
+  }
+  @keyframes preText {
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  @keyframes katana {
+    0% {
+      transform: scaleX(0);
+      opacity: 0;
+    }
+    60% {
+      transform: scaleX(1.05);
+      opacity: 1;
+    }
+    100% {
+      transform: scaleX(1);
+      opacity: 1;
+    }
+  }
+  @keyframes preFloat {
+    0% {
+      opacity: 0;
+      transform: translateY(40vh) scale(0.6);
+    }
+    30% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-20vh) scale(1);
+    }
+  }
+
+  /* ---------- Header ---------- */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 7%;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.35));
+    backdrop-filter: blur(6px);
+    transition: padding 0.28s ease, box-shadow 0.28s ease, background 0.28s ease;
+  }
+  header.scrolled {
+    padding: 10px 7%;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.6);
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    cursor: default;
+  }
+  .logo img {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    object-fit: cover;
+    user-select: none;
+  }
+  nav ul {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    list-style: none;
+  }
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    position: relative;
+    padding: 6px 2px;
+    transition: color 0.3s ease;
+  }
+  nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    height: 2px;
+    width: 0;
+    background: #ff2b4d;
+    transition: width 0.28s ease;
+  }
+  nav a:hover,
+  nav a:focus {
+    color: #ff2b4d;
+    outline: none;
+  }
+  nav a:hover::after,
+  nav a:focus::after {
+    width: 100%;
+  }
+
+  /* Dark/Light mode toggle */
+  #modeToggle {
+    background: none;
+    border: 2px solid #ff2b4d;
+    color: #ff2b4d;
+    font-weight: 700;
+    border-radius: 20px;
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+  }
+  #modeToggle:hover, #modeToggle:focus {
+    background: #ff2b4d;
+    color: #fff;
+    outline: none;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    min-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 6%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    transform: translateZ(0);
+    background-image:
+      radial-gradient(ellipse at 10% 20%, rgba(255, 20, 60, 0.06), transparent 10%),
+      radial-gradient(ellipse at 90% 80%, rgba(0, 0, 0, 0.4), transparent 20%);
+    mix-blend-mode: screen;
+    transition: background 0.5s ease;
+  }
+  body.light .hero-bg {
+    background-image:
+      radial-gradient(ellipse at 10% 20%, rgba(255, 43, 77, 0.15), transparent 10%),
+      radial-gradient(ellipse at 90% 80%, rgba(255, 105, 105, 0.3), transparent 20%);
+  }
+
+  .typing {
+    font-size: 2.1rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    z-index: 3;
+    background: linear-gradient(90deg, #ff9aa2, #ff2b4d, #ffd6d6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 18px rgba(255, 43, 77, 0.12);
+  }
+  body.light .typing {
+    background: linear-gradient(90deg, #b33535, #d84343, #e57e7e);
+  }
+
+  .hero p {
+    z-index: 2;
+    max-width: 900px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.88);
+    font-weight: 400;
+    padding: 0 12px;
+    margin-top: 8px;
+    user-select: none;
+  }
+  body.light .hero p {
+    color: #4b1f1f;
+  }
+
+  /* Play button */
+  .play-wrap {
+    margin-top: 18px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    z-index: 4;
+  }
+  .play-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #ff2b4d, #ff6b6b);
+    color: #fff;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 8px 30px rgba(255, 43, 77, 0.18);
+    transform: translateZ(0);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .play-btn:active {
+    transform: scale(0.98);
+  }
+  .play-pulse {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 18px rgba(255, 43, 77, 0.4);
+    animation: pulse 1.8s infinite;
+  }
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.6);
+      opacity: 0.35;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  /* Neon animated border on buttons and cards */
+  .neon-border {
+    position: relative;
+    border: 2px solid transparent;
+    border-radius: 14px;
+    background-clip: padding-box;
+    transition: box-shadow 0.3s ease;
+  }
+  .neon-border::before {
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    inset: -4px;
+    border-radius: 18px;
+    background: linear-gradient(90deg, #ff2b4d, #ff6b6b, #ff2b4d);
+    filter: blur(10px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+    animation: neonBorderAnim 4s linear infinite;
+  }
+  .neon-border:hover::before,
+  .neon-border:focus-visible::before {
+    opacity: 1;
+  }
+  @keyframes neonBorderAnim {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 200% 50%;
+    }
+  }
+
+  /* ---------- Sections ---------- */
+  section {
+    padding: 64px 7%;
+    position: relative;
+    z-index: 2;
+  }
+  h2 {
+    text-align: center;
+    font-size: 1.9rem;
+    margin-bottom: 22px;
+    position: relative;
+  }
+  /* Glowing horizontal line reveal below titles */
+  h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    margin: 12px auto 0;
+    background: linear-gradient(90deg, #ff2b4d, #ff6b6b);
+    border-radius: 6px;
+    opacity: 0;
+    transform: translateX(-50px);
+    animation: revealLine 0.8s forwards;
+    animation-delay: 0.3s;
+  }
+  @keyframes revealLine {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  .sub {
+    max-width: 980px;
+    margin: 0 auto 26px;
+    color: rgba(255, 255, 255, 0.86);
+    line-height: 1.6;
+    text-align: center;
+    user-select: text;
+  }
+  body.light .sub {
+    color: #4b1f1f;
+  }
+  .projects, .team {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 26px;
+    justify-content: center;
+  }
+
+  .card {
+    width: 300px;
+    padding: 20px;
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+    border: 1px solid rgba(255, 0, 40, 0.05);
+    backdrop-filter: blur(4px);
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.5);
+    transform-style: preserve-3d;
+    transition: transform 0.28s cubic-bezier(0.2, 0.9, 0.2, 1), box-shadow 0.28s;
+    cursor: default;
+    position: relative;
+  }
+  .card.neon-border {
+    border: none;
+  }
+  .card:hover {
+    transform: translateY(-8px) rotateX(4deg) rotateY(6deg);
+    box-shadow: 0 18px 40px rgba(255, 20, 60, 0.08);
+  }
+  .card h3 {
+    margin-bottom: 8px;
+    color: #ffd6d6;
+    user-select: text;
+  }
+  .card p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.85);
+    user-select: text;
+  }
+  body.light .card p {
+    color: #4b1f1f;
+  }
+  .card a {
+    display: inline-block;
+    margin-top: 14px;
+    color: #ff2b4d;
+    font-weight: 700;
+    text-decoration: none;
+    user-select: text;
+    transition: color 0.3s ease;
+  }
+  .card a:hover, .card a:focus {
+    color: #ff6b6b;
+    outline: none;
+  }
+
+  /* ---------- Team member ---------- */
+  .team-member {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: 12px;
+  }
+  .avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid rgba(255, 43, 77, 0.14);
+    margin-bottom: 12px;
+  }
+  .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    user-select: none;
+  }
+  .member-name {
+    font-weight: 700;
+    color: #fff;
+    cursor: pointer;
+    user-select: none;
+  }
+  body.light .member-name {
+    color: #660000;
+  }
+
+  /* ---------- Popup ---------- */
+  .popup-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 99999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.28s ease;
+  }
+  .popup-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+  .popup-content {
+    background: #1b0000;
+    border-radius: 18px;
+    padding: 24px 28px;
+    width: 90vw;
+    max-width: 500px;
+    box-shadow: 0 0 28px rgba(255, 43, 77, 0.6);
+    position: relative;
+    color: #ffbbc3;
+  }
+  .popup-content h3 {
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  .popup-close {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: #ff2b4d;
+    cursor: pointer;
+    user-select: none;
+  }
+  .popup-close:focus {
+    outline: 2px solid #ff2b4d;
+  }
+
+  /* ---------- Contact Form ---------- */
+  form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  label {
+    font-weight: 600;
+    margin-bottom: 4px;
+    user-select: none;
+  }
+  input, textarea {
+    font-family: inherit;
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: none;
+    background: rgba(255, 43, 77, 0.1);
+    color: #fff;
+    font-size: 1rem;
+    transition: background 0.28s ease;
+  }
+  input::placeholder,
+  textarea::placeholder {
+    color: #ffb6bdcc;
+  }
+  input:focus, textarea:focus {
+    outline: 2px solid #ff2b4d;
+    background: rgba(255, 43, 77, 0.18);
+  }
+  body.light input, body.light textarea {
+    background: #ffeded;
+    color: #5c0000;
+  }
+  body.light input::placeholder, body.light textarea::placeholder {
+    color: #ad5a5acc;
+  }
+  button[type="submit"] {
+    margin-top: 18px;
+    align-self: center;
+    background: linear-gradient(90deg, #ff2b4d, #ff6b6b);
+    border: none;
+    color: white;
+    font-weight: 700;
+    padding: 12px 36px;
+    border-radius: 999px;
+    cursor: pointer;
+    box-shadow: 0 6px 30px rgba(255, 43, 77, 0.5);
+    transition: box-shadow 0.3s ease;
+  }
+  button[type="submit"]:hover, button[type="submit"]:focus {
+    box-shadow: 0 12px 50px rgba(255, 43, 77, 0.8);
+    outline: none;
+  }
+  /* Validation message */
+  .form-message {
+    color: #ff6b6b;
+    font-weight: 600;
+    font-size: 0.95rem;
+    min-height: 22px;
+  }
+
+  /* Back to top button */
+  #backToTop {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    background: linear-gradient(90deg, #ff2b4d, #ff6b6b);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 6px 30px rgba(255, 43, 77, 0.6);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    z-index: 9999;
+  }
+  #backToTop.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+  #backToTop:hover {
+    box-shadow: 0 12px 40px rgba(255, 43, 77, 0.9);
+  }
+
+  /* Floating tech icons in hero */
+  .floating-icon {
+    position: absolute;
+    font-size: 2.8rem;
+    color: #ff2b4d;
+    opacity: 0.15;
+    user-select: none;
+    animation: floatMove 8s ease-in-out infinite alternate;
+    filter: drop-shadow(0 0 6px #ff2b4d);
+  }
+  .floating-icon:nth-child(1) {
+    top: 20%;
+    left: 15%;
+    animation-delay: 0s;
+  }
+  .floating-icon:nth-child(2) {
+    top: 40%;
+    right: 18%;
+    animation-delay: 2s;
+  }
+  .floating-icon:nth-child(3) {
+    top: 68%;
+    left: 12%;
+    animation-delay: 4s;
+  }
+  .floating-icon:nth-child(4) {
+    top: 65%;
+    right: 20%;
+    animation-delay: 6s;
+  }
+  @keyframes floatMove {
+    0% { transform: translateY(0) translateX(0) rotate(0);}
+    50% { transform: translateY(10px) translateX(6px) rotate(8deg);}
+    100% { transform: translateY(0) translateX(0) rotate(0);}
+  }
+
+  /* Particle background canvas */
+  #particleCanvas {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: transparent;
+  }
+
+  /* Responsive */
+  @media (max-width: 720px) {
+    nav ul {
+      gap: 12px;
+    }
+    .card {
+      width: 100%;
+    }
+    .hero p {
+      font-size: 1rem;
+    }
+  }
+  </style>
+</head>
+<body>
+
+<div id="scrollProgress"></div>
+
+<!-- PRELOADER -->
+<div id="preloader" role="alert" aria-live="assertive" aria-label="Loading content">
+  <div class="japanese-text" aria-hidden="true">チームジャパニーズ</div>
+  <div class="katana-slash"></div>
+  <div class="pre-controls">Please wait while we ignite your experience...</div>
+  <div class="pre-particles" aria-hidden="true"></div>
+</div>
+
+<header>
+  <div class="logo" aria-label="Team Japanese Logo">
+    <img src="img/japanese.png" alt="Team Japanese Logo" />
+    <span>Team Japanese</span>
+  </div>
+  <nav aria-label="Primary navigation">
+    <ul>
+      <li><a href="#home" tabindex="0">Home</a></li>
+      <li><a href="#projects" tabindex="0">Projects</a></li>
+      <li><a href="#team" tabindex="0">Team</a></li>
+      <li><a href="#contact" tabindex="0">Contact</a></li>
+      <li><button id="modeToggle" aria-pressed="false" aria-label="Toggle dark or light mode">Light Mode</button></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section id="home" class="hero" role="region" aria-label="Introduction and welcome">
+    <canvas id="particleCanvas" aria-hidden="true"></canvas>
+    <div class="floating-icon" aria-hidden="true"><i class="fa-solid fa-microchip"></i></div>
+    <div class="floating-icon" aria-hidden="true"><i class="fa-solid fa-robot"></i></div>
+    <div class="floating-icon" aria-hidden="true"><i class="fa-solid fa-network-wired"></i></div>
+    <div class="floating-icon" aria-hidden="true"><i class="fa-solid fa-shield-alt"></i></div>
+
+    <h1 class="typing" aria-live="polite" aria-atomic="true">Next-Gen Userbot, AI & Cybersecurity</h1>
+    <p>Empowering automation and security with Team Japanese's cutting-edge technology.</p>
+
+    <div class="play-wrap">
+      <button id="playMusic" class="play-btn neon-border" aria-label="Play background music">
+        <div class="play-pulse" aria-hidden="true"></div>
+        Play Music
+      </button>
+    </div>
+  </section>
+
+  <section id="projects" role="region" aria-label="Our Projects">
+    <h2>Projects</h2>
+    <p class="sub">Explore our latest cutting-edge projects combining AI, cybersecurity, and automation.</p>
+    <div class="projects" aria-live="polite" id="projectsList">
+      <!-- Projects loaded dynamically -->
+    </div>
+  </section>
+
+  <section id="team" role="region" aria-label="Meet Our Team">
+    <h2>Team</h2>
+    <p class="sub">Our passionate developers and contributors driving innovation forward.</p>
+    <div class="team" id="teamList" aria-live="polite">
+      <!-- Team members loaded dynamically -->
+    </div>
+  </section>
+
+  <section id="contact" role="region" aria-label="Contact Us">
+    <h2>Contact</h2>
+    <p class="sub">Reach out to us with your questions or project ideas!</p>
+    <form id="contactForm" novalidate>
+      <label for="nameInput">Name</label>
+      <input type="text" id="nameInput" name="name" placeholder="Your full name" required aria-required="true" />
+      <div class="form-message" id="nameMessage" aria-live="polite"></div>
+
+      <label for="emailInput">Email</label>
+      <input type="email" id="emailInput" name="email" placeholder="your@email.com" required aria-required="true" />
+      <div class="form-message" id="emailMessage" aria-live="polite"></div>
+
+      <label for="messageInput">Message</label>
+      <textarea id="messageInput" name="message" rows="5" placeholder="Write your message..." required aria-required="true"></textarea>
+      <div class="form-message" id="msgMessage" aria-live="polite"></div>
+
+      <button type="submit" class="neon-border" aria-label="Send message">Send Message</button>
+      <div class="form-message" id="formStatus" aria-live="polite"></div>
+    </form>
+  </section>
+</main>
+
+<button id="backToTop" aria-label="Back to top" title="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+<!-- AUDIO -->
+<audio id="bgMusic" loop preload="auto" src="https://cdn.pixabay.com/download/audio/2022/03/03/audio_c212177a93.mp3?filename=calm-electronic-ambient-background-10306.mp3" aria-hidden="true"></audio>
+
+<script>
+  // ----------- Preloader particles -----------
+
+  const preloader = document.getElementById('preloader');
+  const preParticlesContainer = document.querySelector('.pre-particles');
+  // Create 25 small floating particles
+  for(let i=0; i<25; i++) {
+    const particle = document.createElement('span');
+    particle.style.left = Math.random() * 100 + 'vw';
+    particle.style.top = Math.random() * 100 + 'vh';
+    particle.style.animationDuration = 5 + Math.random() * 8 + 's';
+    particle.style.animationDelay = (i * 0.2) + 's';
+    preParticlesContainer.appendChild(particle);
+  }
+
+  // Hide preloader after 3 seconds and fade in main content
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      preloader.classList.add('hidden');
+      document.body.style.overflowY = 'auto';
+    }, 3000);
+  });
+
+  // ----------- Dark / Light mode toggle -----------
+
+  const modeToggle = document.getElementById('modeToggle');
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  function applyTheme(theme) {
+    if(theme === 'dark') {
+      document.body.classList.remove('light');
+      modeToggle.textContent = 'Light Mode';
+      modeToggle.setAttribute('aria-pressed', 'false');
+    } else {
+      document.body.classList.add('light');
+      modeToggle.textContent = 'Dark Mode';
+      modeToggle.setAttribute('aria-pressed', 'true');
+    }
+  }
+
+  function getStoredTheme() {
+    return localStorage.getItem('theme');
+  }
+
+  function storeTheme(theme) {
+    localStorage.setItem('theme', theme);
+  }
+
+  // Initialize theme on load
+  (function initTheme() {
+    const stored = getStoredTheme();
+    if(stored) {
+      applyTheme(stored);
+    } else {
+      applyTheme(prefersDark ? 'dark' : 'light');
+    }
+  })();
+
+  modeToggle.addEventListener('click', () => {
+    if(document.body.classList.contains('light')) {
+      applyTheme('dark');
+      storeTheme('dark');
+    } else {
+      applyTheme('light');
+      storeTheme('light');
+    }
+  });
+
+  // ----------- Scroll Progress Bar -----------
+
+  const scrollProgress = document.getElementById('scrollProgress');
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrolled = (scrollTop / docHeight) * 100;
+    scrollProgress.style.width = scrolled + '%';
+
+    // Show back to top button
+    const backToTop = document.getElementById('backToTop');
+    if(scrollTop > 300) {
+      backToTop.classList.add('visible');
+    } else {
+      backToTop.classList.remove('visible');
+    }
+  });
+
+  // Back to top button
+  document.getElementById('backToTop').addEventListener('click', () => {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  });
+
+  // ----------- Smooth scroll for nav links -----------
+
+  document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', e => {
+      e.preventDefault();
+      const targetID = anchor.getAttribute('href').slice(1);
+      const target = document.getElementById(targetID);
+      if(target) {
+        target.scrollIntoView({behavior: 'smooth'});
+      }
+    });
+  });
+
+  // ----------- Floating tech icons animation handled by CSS -----------
+
+  // ----------- Particle Background Canvas -----------
+
+  const canvas = document.getElementById('particleCanvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  const particleCount = 80;
+  const maxDist = 110;
+  let mouseX = null;
+  let mouseY = null;
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  class Particle {
+    constructor() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.radius = 1 + Math.random() * 2;
+      this.vx = (Math.random() - 0.5) * 0.3;
+      this.vy = (Math.random() - 0.5) * 0.3;
+      this.opacity = 0.2 + Math.random() * 0.6;
+    }
+    move() {
+      this.x += this.vx;
+      this.y += this.vy;
+
+      if(this.x < 0 || this.x > canvas.width) this.vx = -this.vx;
+      if(this.y < 0 || this.y > canvas.height) this.vy = -this.vy;
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+      ctx.fillStyle = `rgba(255, 43, 77, ${this.opacity})`;
+      ctx.shadowColor = 'rgba(255, 43, 77, 0.6)';
+      ctx.shadowBlur = 4;
+      ctx.fill();
+    }
+  }
+
+  function drawLines() {
+    for(let i=0; i<particles.length; i++) {
+      for(let j=i+1; j<particles.length; j++) {
+        let dx = particles[i].x - particles[j].x;
+        let dy = particles[i].y - particles[j].y;
+        let dist = Math.sqrt(dx*dx + dy*dy);
+        if(dist < maxDist) {
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(255, 43, 77, ${1 - dist / maxDist})`;
+          ctx.lineWidth = 1;
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.shadowColor = 'rgba(255, 43, 77, 0.2)';
+          ctx.shadowBlur = 2;
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+      p.move();
+      p.draw();
+    });
+    drawLines();
+
+    // Connect particles to mouse
+    if(mouseX !== null && mouseY !== null) {
+      particles.forEach(p => {
+        let dx = p.x - mouseX;
+        let dy = p.y - mouseY;
+        let dist = Math.sqrt(dx*dx + dy*dy);
+        if(dist < maxDist) {
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(255, 43, 77, ${1 - dist / maxDist})`;
+          ctx.lineWidth = 1;
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(mouseX, mouseY);
+          ctx.shadowColor = 'rgba(255, 43, 77, 0.2)';
+          ctx.shadowBlur = 2;
+          ctx.stroke();
+        }
+      });
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+  function initParticles() {
+    particles = [];
+    for(let i=0; i<particleCount; i++) {
+      particles.push(new Particle());
+    }
+  }
+
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    initParticles();
+  });
+
+  canvas.addEventListener('mousemove', e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+  canvas.addEventListener('mouseleave', () => {
+    mouseX = null;
+    mouseY = null;
+  });
+
+  initParticles();
+  animate();
+
+  // ----------- Play Background Music -----------
+
+  const bgMusic = document.getElementById('bgMusic');
+  const playMusicBtn = document.getElementById('playMusic');
+  let musicPlaying = false;
+
+  // Play music after preloader hides automatically
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      bgMusic.volume = 0.25;
+      bgMusic.play().catch(() => {
+        // Autoplay might be blocked, show play button active for user interaction
+        playMusicBtn.textContent = 'Play Music';
+      });
+    }, 3100);
+  });
+
+  playMusicBtn.addEventListener('click', () => {
+    if(musicPlaying) {
+      bgMusic.pause();
+      playMusicBtn.textContent = 'Play Music';
+      musicPlaying = false;
+    } else {
+      bgMusic.play();
+      playMusicBtn.textContent = 'Pause Music';
+      musicPlaying = true;
+    }
+  });
+  bgMusic.addEventListener('ended', () => {
+    musicPlaying = false;
+    playMusicBtn.textContent = 'Play Music';
+  });
+
+  // ----------- Projects Data and Render -----------
+
+  const projectsData = [
+    {
+      title: "NextGen Userbot",
+      description: "A powerful multi-platform automation bot supporting Discord, WhatsApp, Telegram, Instagram, and Twitter.",
+      link: "https://github.com/TeamJapanese/TheJapanese"
+    },
+    {
+      title: "AI Cybersecurity Suite",
+      description: "Intelligent threat detection and automated defense mechanisms powered by AI.",
+      link: "https://github.com/TeamJapanese/AI-Cybersecurity"
+    },
+    {
+      title: "Horror Gaming Engine",
+      description: "A high-tech engine specialized for immersive horror gaming experiences.",
+      link: "https://github.com/TeamJapanese/HorrorGamingEngine"
+    }
+  ];
+
+  const projectsList = document.getElementById('projectsList');
+  projectsData.forEach(proj => {
+    const card = document.createElement('article');
+    card.className = 'card neon-border';
+    card.tabIndex = 0;
+    card.setAttribute('aria-label', proj.title + ' project');
+    card.innerHTML = `
+      <h3>${proj.title}</h3>
+      <p>${proj.description}</p>
+      <a href="${proj.link}" target="_blank" rel="noopener noreferrer" aria-label="Visit ${proj.title} GitHub repository">View on GitHub</a>
+    `;
+    projectsList.appendChild(card);
+  });
+
+  // ----------- Team Data and Render -----------
+
+  const teamData = [
+    {
+      name: "Sandeep Sharma",
+      avatar: "https://avatars.githubusercontent.com/u/68845794?v=4",
+      role: "Founder & Lead Developer",
+      github: "https://github.com/itzsandeepshrma"
+    },
+    {
+      name: "Ayush Sharma",
+      avatar: "https://avatars.githubusercontent.com/u/12345678?v=4",
+      role: "AI Specialist",
+      github: "https://github.com/ayush-sharma"
+    },
+    {
+      name: "Haruki Tanaka",
+      avatar: "https://randomuser.me/api/portraits/men/75.jpg",
+      role: "Cybersecurity Expert",
+      github: "https://github.com/harukitanaka"
+    }
+  ];
+
+  const teamList = document.getElementById('teamList');
+  teamData.forEach(member => {
+    const memberDiv = document.createElement('article');
+    memberDiv.className = 'card neon-border team-member';
+    memberDiv.tabIndex = 0;
+    memberDiv.setAttribute('aria-label', member.name + ' - ' + member.role);
+    memberDiv.innerHTML = `
+      <div class="avatar">
+        <img src="${member.avatar}" alt="${member.name} photo" loading="lazy" />
+      </div>
+      <h3 class="member-name">${member.name}</h3>
+      <p>${member.role}</p>
+      <a href="${member.github}" target="_blank" rel="noopener noreferrer" aria-label="Visit ${member.name} GitHub profile">GitHub</a>
+    `;
+    teamList.appendChild(memberDiv);
+  });
+
+  // ----------- Contact Form Validation -----------
+
+  const contactForm = document.getElementById('contactForm');
+  const nameInput = document.getElementById('nameInput');
+  const emailInput = document.getElementById('emailInput');
+  const messageInput = document.getElementById('messageInput');
+  const nameMessage = document.getElementById('nameMessage');
+  const emailMessage = document.getElementById('emailMessage');
+  const msgMessage = document.getElementById('msgMessage');
+  const formStatus = document.getElementById('formStatus');
+
+  function validateEmail(email) {
+    // Basic regex for email validation
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  contactForm.addEventListener('submit', e => {
+    e.preventDefault();
+
+    let valid = true;
+    nameMessage.textContent = '';
+    emailMessage.textContent = '';
+    msgMessage.textContent = '';
+    formStatus.textContent = '';
+
+    if(nameInput.value.trim().length < 2) {
+      nameMessage.textContent = 'Please enter your full name.';
+      valid = false;
+    }
+    if(!validateEmail(emailInput.value.trim())) {
+      emailMessage.textContent = 'Please enter a valid email address.';
+      valid = false;
+    }
+    if(messageInput.value.trim().length < 10) {
+      msgMessage.textContent = 'Message should be at least 10 characters.';
+      valid = false;
+    }
+    if(!valid) return;
+
+    // Simulate form submission
+    formStatus.style.color = '#ff2b4d';
+    formStatus.textContent = 'Sending message...';
+
+    setTimeout(() => {
+      formStatus.style.color = '#28a745';
+      formStatus.textContent = 'Message sent successfully! We will get back to you soon.';
+      contactForm.reset();
+    }, 1500);
+  });
+
+  // ----------- Konami Code Easter Egg -----------
+
+  const konamiCode = [38,38,40,40,37,39,37,39,66,65];
+  let konamiIndex = 0;
+  let secretMode = false;
+  let secretAudio = new Audio('https://cdn.pixabay.com/download/audio/2021/09/28/audio_22500e0d9f.mp3?filename=8-bit-video-game-notification-7187.mp3');
+  secretAudio.volume = 0.15;
+
+  window.addEventListener('keydown', (e) => {
+    if(e.keyCode === konamiCode[konamiIndex]) {
+      konamiIndex++;
+      if(konamiIndex === konamiCode.length) {
+        konamiIndex = 0;
+        secretMode = !secretMode;
+        if(secretMode) {
+          document.body.style.filter = 'hue-rotate(180deg) saturate(1.4)';
+          secretAudio.play();
+          alert('Secret Cyber Mode Activated!');
+        } else {
+          document.body.style.filter = '';
+          alert('Secret Cyber Mode Deactivated!');
+        }
+      }
+    } else {
+      konamiIndex = 0;
+    }
+  });
+
+</script>
+
+</body>
+</html>
