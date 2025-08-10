@@ -1,451 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Team Japanese - Building the next-gen multi-platform Userbot ecosystem, AI automation, cybersecurity, and horror gaming experience.">
-  <meta name="keywords" content="Userbot, AI, cybersecurity, gaming, automation, Team Japanese">
-  <title>Team Japanese </title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Team Japanese — NextGen</title>
+  <meta name="description" content="Team Japanese - next-gen userbot, AI automation, cybersecurity, and horror gaming." />
   <link rel="shortcut icon" href="img/japanese.png" type="image/png">
+
+  <!-- external libs -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<style>
-  /* Loading Screen Styles */
-  #preloader {
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(circle at center, #0a0a0a, #000);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  z-index: 9999;
-  animation: fadeOut 1s ease 4.5s forwards;
-}
-
-.japanese-text {
-  font-size: 3.8rem;
-  color: #ff0040;
-  text-shadow:
-    0 0 10px #ff0033,
-    0 0 30px #ff0033,
-    0 0 60px #ff0033;
-  transform: scale(0.7);
-  opacity: 0;
-  animation: glowText 1.8s ease-in-out 0.6s forwards;
-}
-
-.katana-slash {
-  width: 100%;
-  height: 3px;
-  background: linear-gradient(to right, transparent, #ff0033, transparent);
-  box-shadow: 0 0 10px #ff0033;
-  transform: scaleX(0);
-  transform-origin: center;
-  margin-top: 30px;
-  animation: katanaStrike 0.6s ease-in-out 2.4s forwards;
-}
-
-.particles {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: 0;
-}
-
-.particles span {
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  background: #ff0033;
-  box-shadow: 0 0 10px #ff0033;
-  border-radius: 50%;
-  animation: float 7s linear infinite;
-}
-.particles span:nth-child(even) {
-  animation-duration: 9s;
-}
-
-@keyframes glowText {
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-@keyframes katanaStrike {
-  0% {
-    transform: scaleX(0);
-    opacity: 0;
-  }
-  50% {
-    transform: scaleX(1.05);
-    opacity: 1;
-  }
-  100% {
-    transform: scaleX(1);
-    opacity: 1;
-  }
-}
-@keyframes float {
-  0% {
-    transform: translateY(100vh) scale(0.5);
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-10vh) scale(1);
-    opacity: 0;
-  }
-}
-@keyframes fadeOut {
-  to {
-    opacity: 0;
-    visibility: hidden;
-  }
-  }
-  
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-    scroll-behavior: smooth;
+  <style>
+  /* ---------- Fonts & reset ---------- */
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(135deg,#100000,#2b0000);
+    color:#f7f3f3;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    overflow-x:hidden;
   }
 
-  body {
-    background: linear-gradient(135deg, #1a0000, #330000);
-    color: #fff;
-    overflow-x: hidden;
+  /* ---------- PRELOADER ---------- */
+  #preloader{
+    position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    background:radial-gradient(circle at 30% 30%, rgba(255,0,0,0.05), rgba(0,0,0,1));
+    z-index:99999;backdrop-filter: blur(2px);
+    transition:opacity .6s ease,visibility .6s ease;
+  }
+  #preloader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+
+  .japanese-text{
+    font-size:3.6rem;line-height:1;color:#ff2b4d;
+    text-shadow:0 0 8px #ff2b4d,0 0 30px rgba(255,0,51,.15);
+    transform:scale(.85);opacity:0;animation:preText 1.2s cubic-bezier(.2,.9,.2,1) .4s forwards;
+    letter-spacing:2px;
+  }
+  .katana-slash{
+    width:70%;height:3px;margin-top:26px;background:linear-gradient(90deg,transparent,#ff1d3a,transparent);
+    box-shadow:0 0 18px rgba(255,29,58,.45);
+    transform:scaleX(0);transform-origin:center;opacity:0;animation:katana .55s ease .9s forwards;
+  }
+  .pre-controls{margin-top:18px;opacity:.85;font-size:.95rem;color:#ffd6dc}
+
+  .pre-particles{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+  .pre-particles span{position:absolute;width:4px;height:4px;border-radius:50%;background:#ff2b4d;box-shadow:0 0 10px rgba(255,43,77,.8);opacity:0;transform:translateY(0) scale(.6);animation:preFloat linear infinite}
+
+  @keyframes preText{to{transform:scale(1);opacity:1}}
+  @keyframes katana{0%{transform:scaleX(0);opacity:0}60%{transform:scaleX(1.05);opacity:1}100%{transform:scaleX(1);opacity:1}}
+  @keyframes preFloat{0%{opacity:0;transform:translateY(40vh) scale(.6)}30%{opacity:1}100%{opacity:0;transform:translateY(-20vh) scale(1)}}
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;top:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;
+    padding:20px 7%;background:linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.35));
+    backdrop-filter: blur(6px);transition:padding .28s ease, box-shadow .28s ease, background .28s ease;
+  }
+  header.scrolled{padding:10px 7%;box-shadow:0 6px 20px rgba(0,0,0,.5);background:rgba(0,0,0,.6)}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.5px}
+  .logo img{width:46px;height:46px;border-radius:50%;object-fit:cover}
+  nav ul{display:flex;gap:18px;align-items:center;list-style:none}
+  nav a{color:#fff;text-decoration:none;font-weight:600;position:relative;padding:6px 2px}
+  nav a::after{content:'';position:absolute;left:0;bottom:-6px;height:2px;width:0;background:#ff2b4d;transition:width .28s ease}
+  nav a:hover::after{width:100%}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    min-height:88vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 6%;
+    text-align:center;position:relative;overflow:hidden;
   }
 
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 10%;
-    background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(10px);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+  .hero-bg{
+    position:absolute;inset:0;z-index:0;pointer-events:none;transform:translateZ(0);
+    background-image:
+      radial-gradient(ellipse at 10% 20%, rgba(255,20,60,.06), transparent 10%),
+      radial-gradient(ellipse at 90% 80%, rgba(0,0,0,.4), transparent 20%);
+    mix-blend-mode:screen;
   }
 
-  .logo-img {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 10px;
-    vertical-align: middle;
+  .typing{
+    font-size:2.1rem;font-weight:700;margin-bottom:12px;z-index:3;
+    background:linear-gradient(90deg,#ff9aa2,#ff2b4d,#ffd6d6);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    text-shadow:0 0 18px rgba(255,43,77,.12);
   }
 
-  .logo {
-    display: flex;
-    align-items: center;
-    color: white;
-    font-weight: bold;
-    font-size: 20px;
+  .hero p{
+    z-index:2;max-width:900px;line-height:1.6;color:rgba(255,255,255,.88);
+    font-weight:400;padding:0 12px;margin-top:8px;
   }
 
-  nav ul {
-    display: flex;
-    gap: 20px;
+  /* Play button */
+  .play-wrap{margin-top:18px;display:flex;gap:12px;align-items:center;z-index:4}
+  .play-btn{
+    display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:999px;
+    background:linear-gradient(90deg,#ff2b4d,#ff6b6b);color:#fff;font-weight:700;border:none;cursor:pointer;
+    box-shadow:0 8px 30px rgba(255,43,77,.18);transform:translateZ(0);transition:transform .18s ease,box-shadow .18s;
   }
+  .play-btn:active{transform:scale(.98)}
+  .play-pulse{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.12);box-shadow:0 0 18px rgba(255,43,77,.4);animation:pulse 1.8s infinite}
+  @keyframes pulse{0%{transform:scale(1);opacity:1}50%{transform:scale(1.6);opacity:.35}100%{transform:scale(1);opacity:1}}
 
-  nav ul li {
-    list-style: none;
+  /* ---------- Sections ---------- */
+  section{padding:64px 7%;position:relative;z-index:2}
+  h2{text-align:center;font-size:1.9rem;margin-bottom:22px}
+  .sub{max-width:980px;margin:0 auto;color:rgba(255,255,255,.86);line-height:1.6;text-align:center;margin-bottom:26px}
+
+  .projects,.team{display:flex;flex-wrap:wrap;gap:26px;justify-content:center}
+
+  .card{
+    width:300px;padding:20px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+    border:1px solid rgba(255,0,40,.05);backdrop-filter: blur(4px);box-shadow:0 6px 30px rgba(0,0,0,.5);
+    transform-style:preserve-3d;transition:transform .28s cubic-bezier(.2,.9,.2,1),box-shadow .28s;cursor:default;
   }
+  .card:hover{transform:translateY(-8px) rotateX(4deg) rotateY(6deg);box-shadow:0 18px 40px rgba(255,20,60,.08)}
+  .card h3{margin-bottom:8px;color:#ffd6d6}
+  .card p{font-size:.95rem;line-height:1.5;color:rgba(255,255,255,.85)}
+  .card a{display:inline-block;margin-top:14px;color:#ff2b4d;font-weight:700;text-decoration:none}
 
-  nav ul li a {
-    text-decoration: none;
-    color: #fff;
-    font-weight: 500;
-    position: relative;
-  }
+  /* ---------- Team member ---------- */
+  .team-member{display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:12px}
+  .avatar{width:110px;height:110px;border-radius:50%;overflow:hidden;border:3px solid rgba(255,43,77,.14);margin-bottom:12px}
+  .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+  .member-name{font-weight:700;color:#fff;cursor:pointer}
 
-  nav ul li a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: #cc0000;
-    transition: width 0.3s;
-  }
+  /* ---------- Popup ---------- */
+  .popup-overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);z-index:120000;opacity:1;transition:opacity .3s}
+  .popup-overlay.hidden{opacity:0;pointer-events:none}
+  .popup-card{width:92%;max-width:420px;background:linear-gradient(180deg,#170000,#2b0000);padding:26px;border-radius:16px;border:1px solid rgba(255,43,77,.12);box-shadow:0 18px 50px rgba(0,0,0,.6);transform:scale(.96);transition:transform .28s,opacity .28s}
+  .popup-card.show{transform:scale(1)}
+  .popup-card img{width:96px;height:96px;border-radius:50%;object-fit:cover;border:3px solid #ff2b4d;display:block;margin:0 auto 12px}
+  .close-x{position:absolute;top:18px;right:20px;color:#ffb5bf;font-size:22px;cursor:pointer}
 
-  nav ul li a:hover::after {
-    width: 100%;
-  }
+  /* ---------- Footer ---------- */
+  footer{padding:28px 7%;background:linear-gradient(180deg,rgba(0,0,0,.3),rgba(0,0,0,.5));text-align:center;color:#ffbfc6}
 
-  .hero {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 0 20px;
-    background: radial-gradient(circle, #400000, #1a0000);
-  }
-
-  .typing {
-    font-size: 2rem;
-    margin-bottom: 10px;
-    color: #ff4d4d;
-    text-shadow: 0 0 10px #cc0000;
-  }
-
-  section {
-    padding: 60px 10%;
-    background: rgba(0, 0, 0, 0.3);
-    border-top: 1px solid #fff2;
-  }
-
-  h2 {
-    text-align: center;
-    margin-bottom: 40px;
-    font-size: 2rem;
-    color: #fff;
-  }
-
-  .projects,
-  .team-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    justify-content: center;
-  }
-
-  .project,
-  .team-member {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 20px;
-    border-radius: 12px;
-    width: 280px;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .project:hover,
-  .team-member:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px rgba(204, 0, 0, 0.5);
-  }
-
-  .project a {
-    color: #cc0000;
-    text-decoration: none;
-    font-weight: bold;
-  }
-
-  .team-member img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #990000;
-    margin-bottom: 10px;
-  }
-
-  form input,
-  form textarea {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
-    border: none;
-    border-radius: 8px;
-    background: #330000;
-    color: #fff;
-    outline: none;
-  }
-
-  form .btn {
-    background: #cc0000;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background 0.3s;
-  }
-
-  form .btn:hover {
-    background: #990000;
-  }
-
-  footer {
-    text-align: center;
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.8);
-    font-size: 0.9rem;
-    border-top: 1px solid #ffdddd30;
-  }
-
-  .social-icon {
-    color: #cc0000;
-    font-size: 1.7rem;
-    transition: 0.3s ease-in-out;
-  }
-
-  .social-icon:hover {
-    transform: scale(1.2);
-  }
-
-  .social-icons-wrapper {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 15px;
-  }
-
-  @media (max-width: 768px) {
-    nav ul {
-      flex-direction: column;
-      background: rgba(0, 0, 0, 0.8);
-      position: absolute;
-      top: 60px;
-      right: 10%;
-      display: none;
-    }
-  }
-  /* Profile Popup Styles */
-.popup-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.75);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 99999;
-  transition: opacity 0.4s ease;
-}
-
-.popup-overlay.hidden {
-  display: none;
-}
-
-.popup-card {
-  background: #1a0000;
-  border: 2px solid #cc0000;
-  padding: 30px 25px;
-  border-radius: 20px;
-  text-align: center;
-  color: #fff;
-  position: relative;
-  width: 90%;
-  max-width: 400px;
-  box-shadow: 0 0 20px #cc0000aa;
-  animation: popupFade 0.5s ease forwards;
-}
-
-.popup-card img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #cc0000;
-  margin-bottom: 15px;
-}
-
-.popup-card h2 {
-  font-size: 1.8rem;
-  color: #ff4d4d;
-  margin-bottom: 8px;
-}
-
-.popup-card p {
-  font-size: 0.95rem;
-  margin-bottom: 12px;
-}
-
-.popup-close {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #ff4d4d;
-  transition: 0.3s;
-}
-
-.popup-close:hover {
-  color: #fff;
-}
-
-.popup-socials {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  font-size: 1.4rem;
-}
-
-.popup-socials a {
-  color: #cc0000;
-  transition: 0.3s;
-}
-
-.popup-socials a:hover {
-  transform: scale(1.3);
-  color: #fff;
-}
-
-@keyframes popupFade {
-  from {
-    opacity: 0;
-    transform: scale(0.7);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-  .team-member h3:hover {
-  color: #ff0033;
-  text-shadow: 0 0 8px #ff0033;
-  }
-  
-
-  
-</style>
+  /* ---------- Sakura petals ---------- */
+  .sakura-layer{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:1}
+  .petal{position:absolute;width:18px;height:18px;background:radial-gradient(circle at 35% 35%, #fff6, #ffbfc6 50%, #ff9aa2 100%);border-radius:60%;opacity:.92;transform-origin:center;will-change:transform,opacity}
+  /* simple responsive */
+  @media (max-width:900px){.japanese-text{font-size:2.6rem}.typing{font-size:1.6rem}.card{width:90%}}
+  </style>
 </head>
 <body>
- <div id="preloader">
-  <div class="particles" id="particles"></div>
-  <div class="japanese-text">チームジャパニーズ</div>
-  <div class="katana-slash"></div>
- </div>
-  <!-- Profile Popup -->
-<div id="profilePopup" class="popup-overlay hidden">
-  <div class="popup-card" data-aos="zoom-in">
-    <span class="popup-close" onclick="closeProfilePopup()">×</span>
-    <img src="img/sandeep.png" alt="Sandeep Sharma">
-    <h2>sᴧɴᴅᴇᴇᴘ sʜᴧʀᴍᴧ</h2>
-    <p>Founder & Visionary of Team Japanese</p>
-    <p>Passionate about automation, AI, cybersecurity, UI/UX, and gaming. Dedicated to building the next-gen userbot & horror games.</p>
-    <div class="popup-socials">
-      <a href="https://github.com/itzsandeepshrma" target="_blank"><i class="fab fa-github"></i></a>
-      <a href="https://instagram.com/itz_sandeep_shrma" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a href="https://www.threads.net/@itz_sandeep_shrma" target="_blank"><i class="fab fa-threads"></i></a>
-      <a href="https://t.me/itz_sandeep_shrma" target="_blank"><i class="fab fa-telegram"></i></a>
-      <a href="https://x.com/itz_sandeep_sh" target="_blank"><i class="fab fa-x-twitter"></i></a>
-      <a href="mailto:sandeepshrmadev@gmail.com"><i class="fas fa-envelope"></i></a>
-    </div>
+
+  <!-- PRELOADER -->
+  <div id="preloader" aria-hidden="true">
+    <div class="pre-particles" id="preParticles"></div>
+    <div class="japanese-text">チームジャパニーズ</div>
+    <div class="katana-slash" aria-hidden="true"></div>
+    <div class="pre-controls">Loading... • Click play to enable sound</div>
   </div>
-</div>
-  <header>
-    <div class="logo">
-      <img src="img/japanese.png" alt="Team Japanese Logo" class="logo-img" />
-      Team Japanese
-    </div>
-    <nav>
+
+  <!-- Header -->
+  <header id="siteHeader">
+    <div class="logo"><img src="img/japanese.png" alt="Team Japanese logo" />Team Japanese</div>
+    <nav aria-label="Main navigation">
       <ul>
         <li><a href="#about">About</a></li>
         <li><a href="#projects">Projects</a></li>
@@ -454,135 +168,267 @@
       </ul>
     </nav>
   </header>
-  <section class="hero">
-    <h1 class="typing" id="typing"></h1>
-    <p>Team Japanese with a vision to create the world's most advanced, high-performance Userbot ecosystem that seamlessly integrates across multiple platforms like Discord, WhatsApp, Telegram, Instagram, and Twitter, as well as expanding into cloud-based AI automation, cybersecurity, and futuristic digital solutions and also working on a horror game that will be available on both PC and mobile, delivering a terrifyingly immersive experience with stunning graphics, intense gameplay, and next-gen horror elements.
-With a passion for technology, automation, and next-generation innovations, and dedicated to making Team Japanese a leader in AI-powered automation, cybersecurity, and gaming.</p>
-  </section>
 
-  <section id="about">
-    <h2 data-aos="fade-up">About Team Japanese</h2>
-    <p data-aos="fade-up">We build high-quality bots, futuristic websites, music platforms, and stunning UI/UX systems. Our mission is to become the largest tech community with high-performance and cyber-futuristic experiences.</p>
-  </section>
+  <!-- HERO -->
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-bg" id="heroBg"></div>
+      <h1 class="typing" id="typing"></h1>
+      <p>We build next-generation multi-platform Userbots, AI automation, cyber-futuristic experiences, and cinematic horror games — crafted with performance-first animations and immersive UI.</p>
 
-  <section id="projects">
-    <h2 data-aos="fade-up">Our GitHub Projects</h2>
-    <div class="projects">
-      <div class="project" data-aos="zoom-in">
-        <h3>TheJapanese Userbot</h3>
-        <p>The Japanese Userbot is a next-gen multi-platform automation bot by TeamJapanese, supporting Discord, WhatsApp, Telegram, Instagram, and Twitter. Built with Python, JavaScript, Docker, and PostgreSQL, it offers fast, secure, and scalable automation with AI features—aiming to be the world’s largest and most advanced Userbot.</p>
-        <a href="https://github.com/TeamJapanese/TheJapanese" target="_blank">View on GitHub</a>
+      <div class="play-wrap">
+        <button class="play-btn" id="playBtn" aria-pressed="false" title="Play theme">
+          <span class="play-pulse" id="playPulse"></span>
+          <span id="playLabel"><i class="fas fa-play"></i> Play Music</span>
+        </button>
+        <div style="opacity:.9;font-size:.95rem">Click to enable audio & cinematic ambience</div>
       </div>
-      <div class="project" data-aos="zoom-in">
-        <h3>1920 The Allerton Castle </h3>
-        <p>1920 The Allerton Castle is an horror game by TeamJapanese, inspired by the film 1920 and Allerton Castle, featuring dynamic scares, immersive visuals, and Unreal Engine 5.</p>
-        <a href="https://github.com/TeamJapanese/1920-The-Allerton-Castle" target="_blank">View on GitHub</a>
+
+      <!-- sakura layer -->
+      <div class="sakura-layer" id="sakura"></div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+      <h2 data-aos="fade-up">About Team Japanese</h2>
+      <p class="sub" data-aos="fade-up">Team Japanese is focused on building high-performance automation bots, futuristic websites, and immersive horror games with an emphasis on polished UI/UX and scalability.</p>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+      <h2 data-aos="fade-up">Our GitHub Projects</h2>
+      <p class="sub" data-aos="fade-up">Open-source, well-documented, and optimized — ready for production and GitHub Pages.</p>
+      <div class="projects" data-aos="zoom-in">
+        <article class="card">
+          <h3>TheJapanese Userbot</h3>
+          <p>Next-gen multi-platform automation for Discord, Telegram, WhatsApp, Instagram, and X — built with Python, JS, Docker & PostgreSQL.</p>
+          <a href="https://github.com/TeamJapanese/TheJapanese" target="_blank" rel="noopener">View on GitHub</a>
+        </article>
+
+        <article class="card">
+          <h3>1920 — The Allerton Castle</h3>
+          <p>Cinematic horror game using Unreal Engine 5 — immersive scares, realistic lighting and next-gen gameplay.</p>
+          <a href="https://github.com/TeamJapanese/1920-The-Allerton-Castle" target="_blank" rel="noopener">View on GitHub</a>
+        </article>
+
+        <article class="card">
+          <h3>TheJapanese Users Portfolio</h3>
+          <p>Ultra-polished portfolio templates with futuristic animations, optimized for performance and GitHub Pages.</p>
+          <a href="https://github.com/TeamJapanese/TheJapanese-Users-Portfolio" target="_blank" rel="noopener">View on GitHub</a>
+        </article>
       </div>
-      <div class="project" data-aos="zoom-in">
-        <h3>The Japanese User Portfolio</h3>
-        <p>TheJapanese-Users-Portfolio is a high-quality, open-source portfolio project by TeamJapanese for Japanese users, offering modern, responsive designs with smooth UI/UX and advanced animations.</p>
-        <a href="https://github.com/TeamJapanese/TheJapanese-Users-Portfolio" target="_blank">View on GitHub</a>
+    </section>
+
+    <!-- Team -->
+    <section id="team">
+      <h2 data-aos="fade-up">Team Members</h2>
+      <div class="team" data-aos="fade-up">
+        <div class="card team-member" data-member="sandeep">
+          <div class="avatar"><img src="img/sandeep.png" alt="Sandeep Sharma" /></div>
+          <div class="member-name" id="memberSandeep">sᴧɴᴅᴇᴇᴘ sʜᴧʀᴍᴧ</div>
+          <p style="margin-top:10px;color:rgba(255,255,255,.85)">Founder & Visionary — automation, AI, cyber, and horror games.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <h2 data-aos="fade-up">Contact Us</h2>
+      <p class="sub" data-aos="fade-up">For collaborations, support, or partnerships — reach out via email or GitHub.</p>
+
+      <div style="max-width:680px;margin:0 auto" data-aos="fade-up">
+        <form action="https://formsubmit.co/teamjapaneseofficial@gmail.com" method="POST">
+          <input name="name" placeholder="Name" required style="width:100%;padding:12px;border-radius:8px;border:none;margin-bottom:10px;background:#2b0000;color:#fff">
+          <input type="email" name="email" placeholder="Email" required style="width:100%;padding:12px;border-radius:8px;border:none;margin-bottom:10px;background:#2b0000;color:#fff">
+          <textarea name="message" rows="5" placeholder="Message" required style="width:100%;padding:12px;border-radius:8px;border:none;background:#2b0000;color:#fff"></textarea>
+          <button type="submit" style="margin-top:10px;padding:12px 18px;border-radius:8px;background:#ff2b4d;border:none;color:#fff;font-weight:700;cursor:pointer">Send</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div style="max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px">
+      <div>&copy; 2025 <strong>Team Japanese</strong> All Rights Reserved</div>
+      <div style="display:flex;gap:12px;align-items:center">
+        <a class="social" href="https://github.com/TeamJapanese" target="_blank" rel="noopener" style="color:#fff"><i class="fab fa-github"></i></a>
+        <a class="social" href="https://instagram.com/teamjapaneseofficial" target="_blank" rel="noopener" style="color:#fff"><i class="fab fa-instagram"></i></a>
+        <a class="social" href="mailto:teamjapaneseofficial@gmail.com" style="color:#fff"><i class="fas fa-envelope"></i></a>
       </div>
     </div>
-  </section>
+  </footer>
 
-<section id="team">
-  <h2>Team Members</h2>
-  <div class="team-container">
-
-    <div class="team-member">
-      <img src="img/sandeep.png" alt="Sandeep Sharma" />
-      <h3>sᴧɴᴅᴇᴇᴘ sʜᴧʀᴍᴧ</h3>
-      <p>Founder & Visionary<br>Leader of Team Japanese, pioneering high-performance, futuristic developer.</p>
-    </div>
-  </div>
-</section>
-
-  <section id="contact">
-    <h2 data-aos="fade-up">Contact Us</h2>
-    <form action="https://formsubmit.co/teamjapaneseofficial@gmail.com" method="POST" data-aos="fade-up">
-      <input type="text" name="name" placeholder="Name" required />
-      <input type="email" name="email" placeholder="Email" required />
-      <input type="text" name="subject" placeholder="Subject" />
-      <input type="text" name="phone" placeholder="Phone Number" />
-      <textarea name="message" placeholder="Your message..." required></textarea>
-      <button class="btn" type="submit">Send</button>
-    </form>
-  </section>
-
-<footer>
-  <div style="padding: 40px 10%; background: linear-gradient(to right, #1a0000, #330000); border-top: 1px solid #660000;">
-    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; text-align: center; color: #fff;">
-      
-      <!-- Left Section -->
-      <div style="flex: 1 1 300px; margin-bottom: 20px;">
-        <h3 style="font-size: 1.8rem; color: #cc0000; text-shadow: 0 0 8px #660000;">Team Japanese</h3>
-        <p style="font-size: 0.95rem; color: #ddd;">In Search Of NextGen</p>
-      </div>
-
-      <!-- Right Section -->
-      <div style="flex: 1 1 300px; margin-bottom: 20px;">
-        <h4 style="color: #fff; margin-bottom: 12px; text-align: center; font-weight: bold;">Follow Us</h4>
-        <div class="social-icons-wrapper">
-          <a href="https://github.com/TeamJapanese" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
-          <a href="https://instagram.com/teamjapaneseofficial" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.threads.net/@teamjapaneseofficial" target="_blank" class="social-icon"><i class="fab fa-threads"></i></a>
-          <a href="https://t.me/TeamJapaneseOfficial" target="_blank" class="social-icon"><i class="fab fa-telegram"></i></a>
-          <a href="https://x.com/TeamJapaneseX" target="_blank" class="social-icon"><i class="fab fa-x-twitter"></i></a>
-          <a href="https://youtube.com/@teamjapaneseofficial?si=mTb2F9up_I3USqzA" target="_blank" class="social-icon"><i class="fab fa-youtube"></i></a>
-          <a href="mailto:teamjapaneseofficial@gmail.com" target="_blank" class="social-icon"><i class="fas fa-envelope"></i></a>
+  <!-- Profile Popup -->
+  <div id="profilePopup" class="popup-overlay hidden" aria-hidden="true">
+    <div class="popup-card" role="dialog" aria-modal="true" aria-labelledby="ppTitle">
+      <div style="position:relative">
+        <span class="close-x" id="closePopup" aria-label="Close popup">&times;</span>
+        <img src="img/sandeep.png" alt="Sandeep Sharma" />
+        <h3 id="ppTitle" style="text-align:center;margin-top:8px;color:#ffd6d6">sᴧɴᴅᴇᴇᴘ sʜᴧʀᴍᴧ</h3>
+        <p style="text-align:center;color:rgba(255,255,255,.9)">Founder & Visionary — automation, AI, cyber, UI/UX & horror gaming.</p>
+        <div style="display:flex;gap:12px;justify-content:center;margin-top:10px">
+          <a href="https://github.com/itzsandeepshrma" target="_blank" rel="noopener" style="color:#fff"><i class="fab fa-github"></i></a>
+          <a href="mailto:sandeepshrmadev@gmail.com" style="color:#fff"><i class="fas fa-envelope"></i></a>
         </div>
       </div>
     </div>
-
-    <!-- Bottom Copyright -->
-    <div style="text-align: center; margin-top: 25px; font-size: 0.85rem; color: #cc0000; text-shadow: 0 0 6px #330000;">
-      &copy; 2025 <strong>Team Japanese</strong> All Rights Reserved
-    </div>
   </div>
-</footer>
-  <script>
-  const particlesContainer = document.getElementById('particles');
-  for (let i = 0; i < 50; i++) {
-    const dot = document.createElement('span');
-    dot.style.left = `${Math.random() * 100}%`;
-    dot.style.animationDelay = `${Math.random() * 6}s`;
-    dot.style.animationDuration = `${4 + Math.random() * 4}s`;
-    particlesContainer.appendChild(dot);
-  }
 
-  setTimeout(() => {
-    document.getElementById("preloader").style.display = "none";
-  }, 4600);
-   </script>
+  <!-- Hidden audio element -->
+  <audio id="bgAudio" loop preload="none">
+    <source src="audio/theme.mp3" type="audio/mpeg">
+    <!-- fallback: add a short ogg/mp3 -->
+  </audio>
+
+  <!-- libs & scripts -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    AOS.init();
-    const text = "Team Japanese";
-    let i = 0;
-    function typeEffect() {
-      if (i < text.length) {
-        document.getElementById("typing").innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typeEffect, 100);
-      }
+  AOS.init({duration:700,once:true,easing:'ease-out-quart'});
+
+  /* ---------- preloader particles ---------- */
+  const preParticles = document.getElementById('preParticles');
+  for(let i=0;i<42;i++){
+    const s=document.createElement('span');
+    s.style.left=(Math.random()*100)+'%';
+    s.style.top=(Math.random()*100)+'%';
+    s.style.transform='translate3d(0,0,0) rotate('+ (Math.random()*360)+'deg)';
+    s.style.animationDuration=(4+Math.random()*5)+'s';
+    s.style.animationDelay=(Math.random()*1.6)+'s';
+    s.style.opacity=0;
+    preParticles.appendChild(s);
+  }
+
+  /* Hide preloader after resources ready-ish */
+  window.addEventListener('load',()=>{
+    setTimeout(()=>document.getElementById('preloader').classList.add('hidden'),900);
+  });
+
+  /* ---------- typing effect (AI-like) ---------- */
+  const typingEl = document.getElementById('typing');
+  const fullText = "Team Japanese — In Search Of NextGen";
+  let tIndex=0;
+  (function type(){
+    if(tIndex <= fullText.length){
+      typingEl.textContent = fullText.slice(0,tIndex);
+      tIndex++;
+      setTimeout(type, 60 + (Math.random()*40)); // organic speed
     }
-    typeEffect();
-  </script>
-  <script>
-  // Open popup when user clicks name
-  document.addEventListener("DOMContentLoaded", () => {
-    const nameElement = [...document.querySelectorAll("h3")].find(el => el.textContent.includes("sᴧɴᴅᴇᴇᴘ"));
-    if (nameElement) {
-      nameElement.style.cursor = "pointer";
-      nameElement.addEventListener("click", () => {
-        document.getElementById("profilePopup").classList.remove("hidden");
-      });
+  })();
+
+  /* ---------- play music control ---------- */
+  const audio = document.getElementById('bgAudio');
+  const playBtn = document.getElementById('playBtn');
+  const playLabel = document.getElementById('playLabel');
+  const playPulse = document.getElementById('playPulse');
+  let playing=false;
+
+  playBtn.addEventListener('click', async () => {
+    try{
+      if(!playing){
+        // try to play audio - user gesture present
+        await audio.play();
+        playing=true;
+        playLabel.innerHTML = '<i class="fas fa-pause"></i> Pause Music';
+        playBtn.setAttribute('aria-pressed','true');
+        playPulse.style.boxShadow='0 0 28px rgba(255,43,77,.9)';
+      } else {
+        audio.pause();
+        playing=false;
+        playLabel.innerHTML = '<i class="fas fa-play"></i> Play Music';
+        playBtn.setAttribute('aria-pressed','false');
+      }
+    }catch(err){
+      console.warn('Audio play denied', err);
     }
   });
 
-  function closeProfilePopup() {
-    document.getElementById("profilePopup").classList.add("hidden");
+  /* ---------- navbar shrink on scroll ---------- */
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll',()=>{
+    header.classList.toggle('scrolled', window.scrollY > 48);
+  });
+
+  /* ---------- popup open from team name ---------- */
+  const memberBtn = document.getElementById('memberSandeep');
+  const profilePopup = document.getElementById('profilePopup');
+  const closePopup = document.getElementById('closePopup');
+  memberBtn && memberBtn.addEventListener('click', () => {
+    profilePopup.classList.remove('hidden');
+    profilePopup.querySelector('.popup-card')?.classList.add('show');
+    document.body.style.overflow='hidden';
+  });
+  closePopup && closePopup.addEventListener('click', () => {
+    profilePopup.classList.add('hidden');
+    profilePopup.querySelector('.popup-card')?.classList.remove('show');
+    document.body.style.overflow='';
+  });
+  profilePopup.addEventListener('click', (e)=> { if(e.target === profilePopup){ closePopup.click(); }});
+
+  /* ---------- 3D tilt effect on cards (lightweight) ---------- */
+  document.querySelectorAll('.card').forEach(card=>{
+    card.addEventListener('mousemove', (e)=>{
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const cx = rect.width/2;
+      const cy = rect.height/2;
+      const dx = (x - cx) / cx;
+      const dy = (y - cy) / cy;
+      card.style.transform = `translateY(-6px) rotateX(${ -dy * 4 }deg) rotateY(${ dx * 6 }deg)`;
+    });
+    card.addEventListener('mouseleave', ()=> card.style.transform = '');
+  });
+
+  /* ---------- sakura petals animation (randomized) ---------- */
+  const sakura = document.getElementById('sakura');
+  function makePetal(){
+    const p = document.createElement('div');
+    p.className='petal';
+    const size = 10 + Math.random()*18;
+    p.style.width = size + 'px';
+    p.style.height = size + 'px';
+    p.style.left = (Math.random()*110 - 5) + '%';
+    p.style.top = (-10 - Math.random()*10) + '%';
+    p.style.opacity = (0.6 + Math.random()*0.4);
+    // random rotation & fall speed
+    const rot = Math.random()*360;
+    const duration = 6 + Math.random()*8;
+    p.style.transform = `rotate(${rot}deg)`;
+    p.style.transition = `transform ${duration}s linear, top ${duration}s linear, left ${duration}s linear, opacity ${duration}s linear`;
+    sakura.appendChild(p);
+    // animate to bottom with slight horizontal drift
+    requestAnimationFrame(()=> {
+      p.style.top = (100 + Math.random()*10) + '%';
+      p.style.left = (Math.random()*120 - 10) + '%';
+      p.style.transform = `rotate(${rot + (Math.random()*360 - 180)}deg) translateY(0)`;
+      p.style.opacity = 0;
+    });
+    setTimeout(()=> p.remove(), duration*1000+200);
+  }
+  // spawn petals periodically (lighter on small screens)
+  const petalRate = window.innerWidth < 800 ? 900 : 420;
+  setInterval(makePetal, petalRate);
+
+  /* ---------- subtle parallax on hero bg ---------- */
+  const heroBg = document.getElementById('heroBg');
+  window.addEventListener('mousemove', (e)=>{
+    const mx = (e.clientX / window.innerWidth - 0.5) * 10;
+    const my = (e.clientY / window.innerHeight - 0.5) * 10;
+    heroBg.style.transform = `translate3d(${mx}px, ${my}px, 0)`;
+  });
+
+  /* ---------- accessibility: close popup on ESC ---------- */
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape' && !profilePopup.classList.contains('hidden')) closePopup.click();
+  });
+
+  /* ---------- ensure reduced-motion preference honored ---------- */
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(prefersReduced){
+    // stop sakura & particles & animations
+    document.querySelectorAll('.petal, .pre-particles span').forEach(el=>el.remove());
+    document.querySelectorAll('[data-aos]').forEach(el=>el.removeAttribute('data-aos'));
   }
   </script>
 </body>
